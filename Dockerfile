@@ -1,6 +1,6 @@
-FROM node:alpine AS development
+FROM node:18-alpine AS development
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/techchallenge-app
 
 COPY package*.json ./
 
@@ -10,12 +10,12 @@ COPY . .
 
 RUN yarn run build
 
-FROM node:alpine AS production
+FROM node:18-alpine AS production
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/techchallenge-app
 
 COPY package*.json ./
 
@@ -23,6 +23,6 @@ RUN yarn install --production
 
 COPY . .
 
-COPY --from=development /usr/src/app/dist ./dist
+COPY --from=development /usr/src/techchallenge-app/dist ./dist
 
 CMD ["node", "dist/main"]
