@@ -8,7 +8,12 @@ RUN yarn install
 
 COPY . .
 
+RUN npx prisma generate
+
+COPY prisma ./prisma
+
 RUN yarn run build
+
 
 FROM node:18-alpine AS production
 
@@ -25,4 +30,4 @@ COPY . .
 
 COPY --from=development /usr/src/techchallenge-app/dist ./dist
 
-CMD ["node", "dist/main"]
+CMD yarn run start:prod
