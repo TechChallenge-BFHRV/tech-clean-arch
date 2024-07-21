@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ItemCategory } from '@prisma/client';
 import { CreateItemUseCase } from 'src/dashboard/application/usecases/items/create-item.usecase';
 import { GetItemUseCase } from 'src/dashboard/application/usecases/items/get-item.usecase';
@@ -59,6 +59,10 @@ export class ItemController {
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'Items not found.',
+  })
+  @ApiParam({
+    name: 'itemCategory',
+    enum: ItemCategory,
   })
   async getItemsPerCategory(@Param('itemCategory') category: ItemCategory) {
     const item = await this.getItemsPerCategoryUseCase.execute(category);
