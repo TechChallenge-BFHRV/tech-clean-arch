@@ -36,40 +36,40 @@ export class ItemController {
   @Get()
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'Item retrieved successfully.',
+    description: 'All items retrieved successfully.',
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    description: 'Item not found.',
+    description: 'Something went wrong retrieving the items.',
   })
   async getItems() {
-    const item = await this.getItemUseCase.execute();
+    const allItems = await this.getItemUseCase.execute();
     return {
       statusCode: HttpStatus.OK,
-      message: 'Item retrieved successfully',
-      data: item,
+      message: 'All items retrieved successfully',
+      data: allItems,
     };
   }
 
   @Get('category/:itemCategory')
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'Items retrieved successfully.',
+    description: 'Category items retrieved successfully.',
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    description: 'Items not found.',
+    description: 'Category items not found.',
   })
   @ApiParam({
     name: 'itemCategory',
     enum: ItemCategory,
   })
   async getItemsPerCategory(@Param('itemCategory') category: ItemCategory) {
-    const item = await this.getItemsPerCategoryUseCase.execute(category);
+    const categoryItems = await this.getItemsPerCategoryUseCase.execute(category);
     return {
       statusCode: HttpStatus.OK,
-      message: 'Items retrieved successfully',
-      data: item,
+      message: `${category} items retrieved successfully. Total: ${categoryItems.length}`,
+      data: categoryItems,
     };
   }
 }
