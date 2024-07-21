@@ -17,3 +17,6 @@ spec:
           image: viniciusdeliz/techchallenge-k8s
           ports: 
             - containerPort: 3000
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://docker:docker@postgres:5432/techchallenge?schema=public"
