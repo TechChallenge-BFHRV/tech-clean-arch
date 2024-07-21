@@ -4,6 +4,10 @@ import { GetCustomerByCpfUseCase } from './application/usecases/customers/get-cu
 import { UpdateCustomerUseCase } from './application/usecases/customers/update-customer.use-case';
 import { DatabaseModule } from './infra/database/database.module';
 import { CustomerController } from './infra/controllers/customer.controller';
+import { CreateItemUseCase } from './application/usecases/items/create-item.usecase';
+import { GetItemUseCase } from './application/usecases/items/get-item.usecase';
+import { GetItemsPerCategoryUseCase } from './application/usecases/items/get-items-per-cateogry.usecase';
+import { ItemController } from './infra/controllers/item.controller';
 
 @Module({
   imports: [forwardRef(() => DatabaseModule)],
@@ -11,12 +15,18 @@ import { CustomerController } from './infra/controllers/customer.controller';
     CreateCustomerUseCase,
     UpdateCustomerUseCase,
     GetCustomerByCpfUseCase,
+    CreateItemUseCase,
+    GetItemUseCase,
+    GetItemsPerCategoryUseCase,
   ],
   exports: [
     CreateCustomerUseCase,
     UpdateCustomerUseCase,
     GetCustomerByCpfUseCase,
+    CreateItemUseCase,
+    GetItemUseCase,
+    GetItemsPerCategoryUseCase,
   ],
-  controllers: [CustomerController],
+  controllers: [CustomerController, ItemController],
 })
 export class DashboardModule {}
