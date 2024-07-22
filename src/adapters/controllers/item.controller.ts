@@ -4,7 +4,7 @@ import { ItemCategory } from '@prisma/client';
 import { CreateItemUseCase } from 'src/core/usecases/items/create-item.usecase';
 import { GetItemUseCase } from 'src/core/usecases/items/get-item.usecase';
 import { GetItemsPerCategoryUseCase } from 'src/core/usecases/items/get-items-per-cateogry.usecase';
-import { ItemDTO } from '../../dashboard/pkg/dtos/item.dto';
+import { ItemDTO } from '../../pkg/dtos/item.dto';
 
 @ApiTags('item')
 @Controller('item')

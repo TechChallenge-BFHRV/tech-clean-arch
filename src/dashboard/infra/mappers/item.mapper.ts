@@ -1,6 +1,6 @@
 import { Item } from '../../../core/entities/item.entity';
-import { ItemDTO } from '../../pkg/dtos/item.dto';
-import { ItemData } from '../../pkg/interfaces/item.interface';
+import { ItemDTO } from '../../../pkg/dtos/item.dto';
+import { ItemData } from '../../../pkg/interfaces/item.interface';
 
 export class ItemMapper {
   public static toEntity(raw: ItemData): Item {

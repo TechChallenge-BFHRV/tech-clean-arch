@@ -1,6 +1,6 @@
 import { Customer } from '../../../core/entities/customer.entity';
-import { CustomerDTO } from '../../pkg/dtos/customer.dto';
-import { CustomerData } from '../../pkg/interfaces/customer.interface';
+import { CustomerDTO } from '../../../pkg/dtos/customer.dto';
+import { CustomerData } from '../../../pkg/interfaces/customer.interface';
 
 export class CustomerMapper {
   public static toEntity(raw: CustomerData): Customer {

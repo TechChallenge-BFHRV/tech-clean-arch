@@ -12,7 +12,7 @@ import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { CreateCustomerUseCase } from '../../core/usecases/customers/create-customer.use-case';
 import { GetCustomerByCpfUseCase } from '../../core/usecases/customers/get-customer-by-cpf.use-case';
 import { UpdateCustomerUseCase } from '../../core/usecases/customers/update-customer.use-case';
-import { CustomerDTO } from '../../dashboard/pkg/dtos/customer.dto';
+import { CustomerDTO } from '../../pkg/dtos/customer.dto';
 
 @ApiTags('customer')
 @Controller('customer')
