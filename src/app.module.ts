@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { DashboardModule } from './dashboard/dashboard.module';
+import { ApplicationModule } from './dashboard/application.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), DashboardModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), ApplicationModule],
   controllers: [],
   providers: [],
 })

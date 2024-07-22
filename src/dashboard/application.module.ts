@@ -29,4 +29,4 @@ import { ItemController } from './infra/controllers/item.controller';
   ],
   controllers: [CustomerController, ItemController],
 })
-export class DashboardModule {}
+export class ApplicationModule {}
