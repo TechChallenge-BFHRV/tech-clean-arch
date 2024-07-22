@@ -1,4 +1,4 @@
-import { Customer } from '../../../../application/entities/customer.entity';
+import { Customer } from '../../../../../core/entities/customer.entity';
 import { Customer as PrismaCustomer } from '@prisma/client';
 
 export class CustomerPrismaMapper {

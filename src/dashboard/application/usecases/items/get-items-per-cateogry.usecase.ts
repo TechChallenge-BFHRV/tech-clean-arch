@@ -1,6 +1,6 @@
 import { IUseCase } from '../usecase';
 import { ItemRepository } from '../../repositories/item.repository';
-import { Item } from '../../entities/item.entity';
+import { Item } from '../../../../core/entities/item.entity';
 import { ItemCategory } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
 import { ItemDTO } from 'src/dashboard/infra/dto/item.dto';

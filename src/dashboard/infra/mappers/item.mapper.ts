@@ -1,4 +1,4 @@
-import { Item } from '../../application/entities/item.entity';
+import { Item } from '../../../core/entities/item.entity';
 import { ItemDTO } from '../dto/item.dto';
 import { ItemData } from '../interfaces/item.interface';
 

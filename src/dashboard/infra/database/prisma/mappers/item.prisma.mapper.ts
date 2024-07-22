@@ -1,4 +1,4 @@
-import { Item } from '../../../../application/entities/item.entity';
+import { Item } from '../../../../../core/entities/item.entity';
 import { Item as PrismaItem } from '@prisma/client';
 
 export class ItemPrismaMapper {

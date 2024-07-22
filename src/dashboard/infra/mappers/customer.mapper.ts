@@ -1,4 +1,4 @@
-import { Customer } from '../../application/entities/customer.entity';
+import { Customer } from '../../../core/entities/customer.entity';
 import { CustomerDTO } from '../dto/customer.dto';
 import { CustomerData } from '../interfaces/customer.interface';
 
