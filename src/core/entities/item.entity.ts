@@ -1,4 +1,4 @@
-import { ItemCategory } from '@prisma/client';
+import { ItemCategory } from './item-categories.entity';
 export class Item {
   id: number;
   name: string;
