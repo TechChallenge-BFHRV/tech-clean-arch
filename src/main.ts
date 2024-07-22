@@ -19,7 +19,7 @@ import {
   PROJECT_NAME,
   PROJECT_DESCRIPTION,
   PROJECT_VERSION,
-} from './core/config';
+} from './config';
 import HttpExceptionFilter from './exceptions/http-exception.filter';
 
 const DEFAULT_PORT = 3000;
