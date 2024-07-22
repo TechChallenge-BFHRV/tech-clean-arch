@@ -2,7 +2,7 @@ import { IUseCase } from '../usecase';
 import { ItemRepository } from '../../repositories/item.repository';
 import { Item } from '../../../../core/entities/item.entity';
 import { Injectable } from '@nestjs/common';
-import { ItemDTO } from 'src/dashboard/infra/dto/item.dto';
+import { ItemDTO } from '../../dtos/item.dto';
 import { ItemMapper } from 'src/dashboard/infra/mappers/item.mapper';
 
 @Injectable()

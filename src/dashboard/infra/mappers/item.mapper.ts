@@ -1,5 +1,5 @@
 import { Item } from '../../../core/entities/item.entity';
-import { ItemDTO } from '../dto/item.dto';
+import { ItemDTO } from '../../application/dtos/item.dto';
 import { ItemData } from '../interfaces/item.interface';
 
 export class ItemMapper {
