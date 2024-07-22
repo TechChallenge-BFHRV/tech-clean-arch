@@ -7,7 +7,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import CustomerIdInvalidException from '../../exceptions/customer-id-invalid.exception';
+import CustomerIdInvalidException from './/customer-id-invalid.exception';
 
 @Catch()
 export default class HttpExceptionFilter implements ExceptionFilter<Error> {

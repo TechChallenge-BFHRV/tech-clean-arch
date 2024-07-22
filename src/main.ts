@@ -20,7 +20,7 @@ import {
   PROJECT_DESCRIPTION,
   PROJECT_VERSION,
 } from './core/config';
-import HttpExceptionFilter from './core/exceptions/http-exception.filter';
+import HttpExceptionFilter from './exceptions/http-exception.filter';
 
 const DEFAULT_PORT = 3000;
 const DEFAULT_API_PREFIX = '/api';
