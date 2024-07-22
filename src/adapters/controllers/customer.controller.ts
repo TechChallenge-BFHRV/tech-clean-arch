@@ -9,10 +9,10 @@ import {
   Get,
 } from '@nestjs/common';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
-import { CreateCustomerUseCase } from '../../application/usecases/customers/create-customer.use-case';
-import { GetCustomerByCpfUseCase } from '../../application/usecases/customers/get-customer-by-cpf.use-case';
-import { UpdateCustomerUseCase } from '../../application/usecases/customers/update-customer.use-case';
-import { CustomerDTO } from '../dto/customer.dto';
+import { CreateCustomerUseCase } from '../../dashboard/application/usecases/customers/create-customer.use-case';
+import { GetCustomerByCpfUseCase } from '../../dashboard/application/usecases/customers/get-customer-by-cpf.use-case';
+import { UpdateCustomerUseCase } from '../../dashboard/application/usecases/customers/update-customer.use-case';
+import { CustomerDTO } from '../../dashboard/infra/dto/customer.dto';
 
 @ApiTags('customer')
 @Controller('customer')
