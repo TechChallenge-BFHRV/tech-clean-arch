@@ -3,7 +3,7 @@ import { IUseCase } from '../usecase';
 import { Item } from '../../entities/item.entity';
 import { ItemRepository } from '../../../adapters/repositories/item.repository';
 import { ItemDTO } from '../../../pkg/dtos/item.dto';
-import { ItemMapper } from 'src/external/datasources/mappers/item.mapper';
+import { ItemMapper } from 'src/adapters/mappers/item.mapper';
 
 @Injectable()
 export class CreateItemUseCase implements IUseCase<Item> {
