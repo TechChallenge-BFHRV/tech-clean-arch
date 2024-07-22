@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CustomerRepository } from '../../repositories/customer.repository';
+import { CustomerRepository } from 'src/adapters/repositories/customer.repository';
 import { IUseCase } from '../usecase';
 import { Customer } from '../../../../core/entities/customer.entity';
 

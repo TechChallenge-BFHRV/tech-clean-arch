@@ -1,5 +1,5 @@
 import { IUseCase } from '../usecase';
-import { ItemRepository } from '../../repositories/item.repository';
+import { ItemRepository } from '../../../../adapters/repositories/item.repository';
 import { Item } from '../../../../core/entities/item.entity';
 import { Injectable } from '@nestjs/common';
 import { ItemDTO } from '../../dtos/item.dto';
