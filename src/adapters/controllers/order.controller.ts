@@ -8,7 +8,7 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags, ApiParam } from '@nestjs/swagger';
 import { Status } from '@prisma/client';
 import { AddItemToOrderDTO } from '../../pkg/dtos/add-item-to-order-dto';
 
@@ -274,6 +274,10 @@ export class OrderController {
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
     description: 'Invalid request.',
+  })
+  @ApiParam({
+    name: 'orderStatus',
+    enum: Status,
   })
   async getOrdersByStatus(@Param('orderStatus') orderStatus: Status) {
     const orders = await this.getOrdersByStatusUseCase.execute(orderStatus);
