@@ -1,35 +1,26 @@
 import {
-  IsInt,
   IsString,
   IsOptional,
   IsEmail,
-  IsDate,
   ValidateNested,
 } from 'class-validator';
-import { Type } from 'class-transformer';
 
 export class CustomerDTO {
-  @IsInt()
   id: number;
+  createdAt: Date;
+  updatedAt: Date;
 
   @IsOptional()
   @IsEmail()
   email: string;
 
+  @IsOptional()
   @IsString()
   name: string;
 
   @IsOptional()
   @IsString()
   cpf: string;
-
-  @IsDate()
-  @Type(() => Date)
-  createdAt: Date;
-
-  @IsDate()
-  @Type(() => Date)
-  updatedAt: Date;
 
   @ValidateNested({ each: true })
   orders: any[];

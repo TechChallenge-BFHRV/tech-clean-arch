@@ -4,16 +4,11 @@ import { CustomerData } from '../../pkg/interfaces/customer.interface';
 
 export class CustomerMapper {
   public static toEntity(raw: CustomerData): Customer {
-    return new Customer(
-      raw.id,
-      raw.email,
-      raw.name,
-      raw.cpf,
-      raw.createdAt,
-      raw.updatedAt,
-      raw.orders,
-      raw.checkout,
-    );
+    return {
+      id: raw.id,
+      createdAt: raw.createdAt,
+      updatedAt: raw.updatedAt,
+    }
   }
 
   public static toDTO(entity: Customer): CustomerDTO {

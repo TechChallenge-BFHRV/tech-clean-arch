@@ -3,13 +3,21 @@ import { Customer as PrismaCustomer } from '@prisma/client';
 
 export class CustomerPrismaMapper {
   public static toEntity(raw: PrismaCustomer): Customer {
-    return new Customer(
-      raw.id,
-      raw.email,
-      raw.name,
-      raw.cpf,
-      raw.createdAt,
-      raw.updatedAt,
-    );
+    return {
+      id: raw.id,
+      createdAt: raw.createdAt,
+      updatedAt: raw.updatedAt,
+      email: raw.email,
+      name: raw.name,
+      cpf: raw.cpf,
+    };
+  }
+
+  public static toPrisma(raw: Customer): PrismaCustomer {
+    return {
+      id: raw.id,
+      createdAt: raw.createdAt,
+      updatedAt: raw.updatedAt,
+    } as PrismaCustomer;
   }
 }

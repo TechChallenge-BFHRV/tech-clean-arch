@@ -9,7 +9,12 @@ export class CustomerPrismaRepository implements CustomerRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(customer: Customer): Promise<Customer> {
-    return CustomerPrismaMapper.toEntity(customer);
+    const prismaCustomer = await this.prisma.customer.create({
+      data: {
+        ...CustomerPrismaMapper.toPrisma(customer)
+      }
+    });
+    return CustomerPrismaMapper.toEntity(prismaCustomer);
   }
 
   async getCustomerByCpf(cpf: string): Promise<Customer> {
@@ -28,4 +33,19 @@ export class CustomerPrismaRepository implements CustomerRepository {
       },
     });
   }
+
+  async getById(id: number): Promise<Customer> {
+    console.log('get by id repository', id);
+    return null;
+  }
+
+  async getAll(): Promise<Customer[]> {
+    console.log('got all customers...');
+    return null;
+  }
+
+  async delete(id: number): Promise<void> {
+    return null
+  }
+
 }

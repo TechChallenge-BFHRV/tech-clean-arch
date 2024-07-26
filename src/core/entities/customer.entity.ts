@@ -2,20 +2,20 @@
 
 export class Customer {
   id: number;
-  email: string;
-  name: string;
-  cpf: string;
   createdAt: Date;
   updatedAt: Date;
+  email?: string;
+  name?: string;
+  cpf?: string;
   orders?: any;
   checkout?: any;
   constructor(
     id: number,
-    email: string,
-    name: string,
-    cpf: string,
-    createdAt?: Date,
-    updatedAt?: Date,
+    createdAt: Date,
+    updatedAt: Date,
+    email?: string,
+    name?: string,
+    cpf?: string,
     orders?: any,
     checkout?: any,
   ) {
