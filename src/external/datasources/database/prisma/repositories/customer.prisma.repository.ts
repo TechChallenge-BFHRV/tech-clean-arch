@@ -25,6 +25,15 @@ export class CustomerPrismaRepository implements CustomerRepository {
     return customer;
   }
 
+  async setCustomerCpf(id: number, cpf: string): Promise<Customer> {
+    return await this.prisma.customer.update({
+      where: { id: id },
+      data: {
+        cpf: cpf,
+      },
+    });
+  }
+
   async update(id: number, customer: Customer): Promise<Customer> {
     return await this.prisma.customer.update({
       where: { id: id },

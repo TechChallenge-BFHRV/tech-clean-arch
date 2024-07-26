@@ -25,6 +25,7 @@ import { SetOrderToCancelledUseCase } from '../core/usecases/orders/set-order-to
 import { SetOrderToFinishedUseCase } from '../core/usecases/orders/set-order-to-finished.usecase';
 import { SetOrderToPrepareUseCase } from '../core/usecases/orders/set-order-to-prepare.usecase';
 import { SetOrderToReadyUseCase } from '../core/usecases/orders/set-order-to-ready.usecase';
+import { SetCustomerCpfUseCase } from 'src/core/usecases/customers/set-customer-cpf.use-case';
 
 
 @Module({
@@ -50,7 +51,8 @@ import { SetOrderToReadyUseCase } from '../core/usecases/orders/set-order-to-rea
     SetOrderToCancelledUseCase,
     SetOrderToFinishedUseCase,
     SetOrderToPrepareUseCase,
-    SetOrderToReadyUseCase
+    SetOrderToReadyUseCase,
+    SetCustomerCpfUseCase
   ],
   exports: [
     CreateCustomerUseCase,
@@ -73,7 +75,8 @@ import { SetOrderToReadyUseCase } from '../core/usecases/orders/set-order-to-rea
     SetOrderToCancelledUseCase,
     SetOrderToFinishedUseCase,
     SetOrderToPrepareUseCase,
-    SetOrderToReadyUseCase
+    SetOrderToReadyUseCase,
+    SetCustomerCpfUseCase
   ],
   controllers: [CustomerController, ItemController, OrderController],
 })

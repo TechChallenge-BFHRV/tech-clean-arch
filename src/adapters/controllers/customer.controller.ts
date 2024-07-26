@@ -11,7 +11,7 @@ import {
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { CreateCustomerUseCase } from '../../core/usecases/customers/create-customer.use-case';
 import { GetCustomerByCpfUseCase } from '../../core/usecases/customers/get-customer-by-cpf.use-case';
-import { UpdateCustomerUseCase } from '../../core/usecases/customers/update-customer.use-case';
+import { SetCustomerCpfUseCase } from '../../core/usecases/customers/set-customer-cpf.use-case';
 import { CustomerDTO } from '../../pkg/dtos/customer.dto';
 
 @ApiTags('customer')
@@ -19,7 +19,7 @@ import { CustomerDTO } from '../../pkg/dtos/customer.dto';
 export class CustomerController {
   constructor(
     private readonly createCustomerUseCase: CreateCustomerUseCase,
-    private readonly updateCustomerUseCase: UpdateCustomerUseCase,
+    private readonly setCustomerCpfUseCase: SetCustomerCpfUseCase,
     private readonly getCustomerByCpfUseCase: GetCustomerByCpfUseCase,
   ) {}
 
@@ -50,15 +50,15 @@ export class CustomerController {
     status: HttpStatus.BAD_REQUEST,
     description: 'Invalid input data.',
   })
-  async update(
+  async setCustomerCpf(
     @Param('customerId') id: number,
-    @Query('cpf') dto: CustomerDTO,
+    @Query('cpf') cpf: string,
   ) {
-    const customerUpdated = await this.updateCustomerUseCase.execute(id, dto);
+    const updatedCustomer = await this.setCustomerCpfUseCase.execute(id, cpf);
     return {
       statusCode: HttpStatus.ACCEPTED,
       message: 'Customer updated successfully',
-      data: customerUpdated,
+      data: updatedCustomer,
     };
   }
 
