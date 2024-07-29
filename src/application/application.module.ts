@@ -26,10 +26,23 @@ import { SetOrderToFinishedUseCase } from '../core/usecases/orders/set-order-to-
 import { SetOrderToPrepareUseCase } from '../core/usecases/orders/set-order-to-prepare.usecase';
 import { SetOrderToReadyUseCase } from '../core/usecases/orders/set-order-to-ready.usecase';
 import { SetCustomerCpfUseCase } from 'src/core/usecases/customers/set-customer-cpf.use-case';
-
+import { IntegrationModule } from 'src/external/integrations/integration.module';
+import { CreateCheckoutUseCase } from 'src/core/usecases/checkouts/create-checkout.usecase';
+import { checkoutController } from 'src/adapters/controllers/checkout.controller';
+import { BullModule } from '@nestjs/bull';
 
 @Module({
-  imports: [forwardRef(() => DatabaseModule)],
+  imports: [
+    forwardRef(() => DatabaseModule),
+    forwardRef(() => IntegrationModule),
+    BullModule.forRoot('redis', {
+      host: 'redis',
+      port: 6379,
+    }),
+    BullModule.registerQueue({
+      name: 'order-queue',
+    }),
+  ],
   providers: [
     CreateCustomerUseCase,
     UpdateCustomerUseCase,
@@ -52,7 +65,8 @@ import { SetCustomerCpfUseCase } from 'src/core/usecases/customers/set-customer-
     SetOrderToFinishedUseCase,
     SetOrderToPrepareUseCase,
     SetOrderToReadyUseCase,
-    SetCustomerCpfUseCase
+    SetCustomerCpfUseCase,
+    CreateCheckoutUseCase,
   ],
   exports: [
     CreateCustomerUseCase,
@@ -76,8 +90,14 @@ import { SetCustomerCpfUseCase } from 'src/core/usecases/customers/set-customer-
     SetOrderToFinishedUseCase,
     SetOrderToPrepareUseCase,
     SetOrderToReadyUseCase,
-    SetCustomerCpfUseCase
+    SetCustomerCpfUseCase,
+    CreateCheckoutUseCase,
   ],
-  controllers: [CustomerController, ItemController, OrderController],
+  controllers: [
+    CustomerController,
+    ItemController,
+    OrderController,
+    checkoutController,
+  ],
 })
-export class ApplicationModule { }
+export class ApplicationModule {}
