@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { ItemCategory } from '@prisma/client';
+import { ItemCategory } from 'src/core/entities/item-categories.entity';
 import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class ItemDTO {
