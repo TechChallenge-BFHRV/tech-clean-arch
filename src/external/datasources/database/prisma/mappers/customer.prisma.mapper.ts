@@ -16,6 +16,9 @@ export class CustomerPrismaMapper {
   public static toPrisma(raw: Customer): PrismaCustomer {
     return {
       id: raw.id,
+      cpf: raw.cpf,
+      email: raw.email,
+      name: raw.name,
       createdAt: raw.createdAt,
       updatedAt: raw.updatedAt,
     } as PrismaCustomer;

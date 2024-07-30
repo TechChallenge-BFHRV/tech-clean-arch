@@ -6,6 +6,9 @@ export class CustomerMapper {
   public static toEntity(raw: CustomerData): Customer {
     return {
       id: raw.id,
+      email: raw.email,
+      name: raw.name,
+      cpf: raw.cpf,
       createdAt: raw.createdAt,
       updatedAt: raw.updatedAt,
     };
