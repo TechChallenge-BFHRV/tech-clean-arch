@@ -1,0 +1,104 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id        Int        @id @default(autoincrement())
+  email     String?    @unique
+  name      String?
+  cpf       String?    @unique
+  createdAt DateTime?   @default(now())
+  updatedAt DateTime?   @updatedAt
+  orders    Order[]
+  Checkout  Checkout[]
+}
+
+model Item {
+  id              Int          @id @default(autoincrement())
+  name            String       @unique
+  description     String?
+  imageUrl        String?
+  price           Int
+  preparationTime Int
+  category        ItemCategory
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  orderItems      OrderItems[]
+}
+
+model OrderItems {
+  id       Int     @id @default(autoincrement())
+  orderId  Int
+  itemId   Int
+  isActive Boolean @default(true)
+
+  Order Order @relation(fields: [orderId], references: [id])
+  Item  Item  @relation(fields: [itemId], references: [id])
+}
+
+model Order {
+  id                  Int          @id @default(autoincrement())
+  totalPrice          Int?
+  finalPrice          Int?
+  preparationTime     Int?
+  status              Status
+  step                Step
+  createdAt           DateTime?    @default(now())
+  updatedAt           DateTime?    @updatedAt
+  InProgressTimestamp DateTime?
+  customerId          Int?
+  Customer            Customer?    @relation(fields: [customerId], references: [id])
+  orderItems          OrderItems[]
+  Checkout            Checkout[]
+}
+
+model Checkout {
+  id         Int            @id @default(autoincrement())
+  orderId    Int?
+  customerId Int?
+  status     CheckoutStatus
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+  Order      Order?         @relation(fields: [orderId], references: [id])
+  Customer   Customer?      @relation(fields: [customerId], references: [id])
+}
+
+enum Status {
+  STARTED
+  PENDING
+  APPROVED
+  IN_PROGRESS
+  READY
+  FINISHED
+  CANCELLED
+}
+
+enum CheckoutStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum Step {
+  START
+  MEAL
+  DRINK
+  SIDE_DISH
+  DESERT
+  CHECKOUT
+  PAYMENT_REQUEST
+  COMPLETED
+}
+
+enum ItemCategory {
+  LANCHE
+  ACOMPANHAMENTO
+  BEBIDA
+  SOBREMESA
+}
