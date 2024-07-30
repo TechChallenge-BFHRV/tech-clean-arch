@@ -9,7 +9,9 @@ export class CreateCustomerUseCase implements IUseCase<Customer> {
   constructor(private customerRepository: CustomerRepository) {}
 
   async execute(customer: Customer): Promise<Customer> {
-    const generatedCustomer = await this.customerRepository.create(CustomerMapper.toEntity(customer));
+    const generatedCustomer = await this.customerRepository.create(
+      CustomerMapper.toEntity(customer),
+    );
     return CustomerMapper.toDTO(generatedCustomer);
   }
 }

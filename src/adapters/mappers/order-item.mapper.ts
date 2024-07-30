@@ -9,10 +9,7 @@ export class OrderItemMapper {
       orderId: raw.orderId,
       itemId: raw.itemId,
       Item: raw.Item,
-      isActive: raw.isActive
-
-      
-    
+      isActive: raw.isActive,
     };
   }
 
@@ -21,8 +18,7 @@ export class OrderItemMapper {
       id: entity.id,
       Item: entity.Item,
       orderId: entity.orderId,
-      itemId: entity.itemId     
-    
+      itemId: entity.itemId,
     };
   }
 }

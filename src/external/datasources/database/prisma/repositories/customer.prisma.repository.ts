@@ -11,8 +11,8 @@ export class CustomerPrismaRepository implements CustomerRepository {
   async create(customer: Customer): Promise<Customer> {
     const prismaCustomer = await this.prisma.customer.create({
       data: {
-        ...CustomerPrismaMapper.toPrisma(customer)
-      }
+        ...CustomerPrismaMapper.toPrisma(customer),
+      },
     });
     return CustomerPrismaMapper.toEntity(prismaCustomer);
   }
@@ -54,7 +54,6 @@ export class CustomerPrismaRepository implements CustomerRepository {
   }
 
   async delete(id: number): Promise<void> {
-    return null
+    return null;
   }
-
 }

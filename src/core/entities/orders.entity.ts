@@ -21,7 +21,6 @@ export class Order {
     step: Step,
     createdAt?: Date,
     updatedAt?: Date,
-
   ) {
     this.id = id;
     this.totalPrice = totalPrice;

@@ -9,7 +9,6 @@ export class Item {
   updatedAt: Date;
   category: ItemCategory;
   preparationTime: number;
-
   constructor(
     id: number,
     name: string,
@@ -29,6 +28,6 @@ export class Item {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.category = category;
-    this.preparationTime = 0;
+    this.preparationTime = preparationTime || 0;
   }
 }

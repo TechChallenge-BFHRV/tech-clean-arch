@@ -2,8 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { Status, Step } from '@prisma/client';
 import { Order } from '../../../../../core/entities/orders.entity';
 import { OrderRepository } from '../../../../../adapters/repositories/order.repository';
-import { OrderPrismaMapper } from '../mappers/order.prisma.mapper';
-
 import { PrismaService } from '../prisma.service';
 
 @Injectable()
@@ -11,8 +9,6 @@ export class PrismaOrderRepository implements OrderRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(order: Order): Promise<Order> {
-    //return OrderPrismaMapper.toEntity(order)
-
     const createdOrder = await this.prisma.order.create({
       data: {
         totalPrice: order.totalPrice,
@@ -90,10 +86,7 @@ export class PrismaOrderRepository implements OrderRepository {
     return orders;
   }
 
-  async setOrderCustomer(
-    orderId: number,
-    customerId: number,
-  ): Promise<Order> {
+  async setOrderCustomer(orderId: number, customerId: number): Promise<Order> {
     const updatedOrderCustomer = await this.prisma.order.update({
       where: { id: orderId },
       data: {

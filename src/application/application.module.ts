@@ -26,10 +26,27 @@ import { SetOrderToFinishedUseCase } from '../core/usecases/orders/set-order-to-
 import { SetOrderToPrepareUseCase } from '../core/usecases/orders/set-order-to-prepare.usecase';
 import { SetOrderToReadyUseCase } from '../core/usecases/orders/set-order-to-ready.usecase';
 import { SetCustomerCpfUseCase } from 'src/core/usecases/customers/set-customer-cpf.use-case';
-
+import { IntegrationModule } from 'src/external/integrations/integration.module';
+import { CreateCheckoutUseCase } from 'src/core/usecases/checkouts/create-checkout.usecase';
+import { CheckoutController } from 'src/adapters/controllers/checkout.controller';
+import { BullModule } from '@nestjs/bull';
+import { OrderQueueUseCase } from '../core/usecases/orders/queue/order-queue.usecase';
+import { OrderProcessor } from '../core/usecases/orders/queue/processor/order.processor';
 
 @Module({
-  imports: [forwardRef(() => DatabaseModule)],
+  imports: [
+    forwardRef(() => DatabaseModule),
+    forwardRef(() => IntegrationModule),
+    BullModule.forRoot({
+      redis: {
+        host: 'redis',
+        port: 6379,
+      },
+    }),
+    BullModule.registerQueue({
+      name: 'order-queue',
+    }),
+  ],
   providers: [
     CreateCustomerUseCase,
     UpdateCustomerUseCase,
@@ -52,7 +69,10 @@ import { SetCustomerCpfUseCase } from 'src/core/usecases/customers/set-customer-
     SetOrderToFinishedUseCase,
     SetOrderToPrepareUseCase,
     SetOrderToReadyUseCase,
-    SetCustomerCpfUseCase
+    SetCustomerCpfUseCase,
+    CreateCheckoutUseCase,
+    OrderQueueUseCase,
+    OrderProcessor,
   ],
   exports: [
     CreateCustomerUseCase,
@@ -76,8 +96,16 @@ import { SetCustomerCpfUseCase } from 'src/core/usecases/customers/set-customer-
     SetOrderToFinishedUseCase,
     SetOrderToPrepareUseCase,
     SetOrderToReadyUseCase,
-    SetCustomerCpfUseCase
+    SetCustomerCpfUseCase,
+    CreateCheckoutUseCase,
+    OrderQueueUseCase,
+    OrderProcessor,
   ],
-  controllers: [CustomerController, ItemController, OrderController],
+  controllers: [
+    CustomerController,
+    ItemController,
+    OrderController,
+    CheckoutController,
+  ],
 })
-export class ApplicationModule { }
+export class ApplicationModule {}

@@ -6,10 +6,7 @@ import { IUseCase } from '../usecase';
 
 @Injectable()
 export class CreateOrderUseCase implements IUseCase<Order> {
-  constructor(
-    
-    private readonly orderRepository: OrderRepository,
-  ) {}
+  constructor(private readonly orderRepository: OrderRepository) {}
   async execute(): Promise<Order> {
     const order: Order = {
       step: Step.START,

@@ -5,9 +5,7 @@ import { IUseCase } from '../usecase';
 
 @Injectable()
 export class SetCustomerCpfUseCase implements IUseCase<Customer> {
-  constructor(
-    private readonly customerRepository: CustomerRepository,
-  ) {}
+  constructor(private readonly customerRepository: CustomerRepository) {}
 
   async execute(id: number, cpf: string): Promise<Customer> {
     const updatedCustomer = await this.customerRepository.setCustomerCpf(

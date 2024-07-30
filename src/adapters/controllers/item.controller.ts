@@ -65,7 +65,8 @@ export class ItemController {
     enum: ItemCategory,
   })
   async getItemsPerCategory(@Param('itemCategory') category: ItemCategory) {
-    const categoryItems = await this.getItemsPerCategoryUseCase.execute(category);
+    const categoryItems =
+      await this.getItemsPerCategoryUseCase.execute(category);
     return {
       statusCode: HttpStatus.OK,
       message: `${category} items retrieved successfully. Total: ${categoryItems.length}`,

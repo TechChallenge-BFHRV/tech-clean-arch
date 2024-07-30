@@ -13,7 +13,6 @@ export class OrderPrismaMapper {
       updatedAt: raw.updatedAt,
       //InProgressTimestamp: raw.InProgressTimestamp,
       //customerId: raw.customerId,
-    
     };
   }
 

@@ -19,6 +19,5 @@ export class OrderItem {
     this.itemId = itemId;
     this.Item = Item;
     this.isActive = isActive;
-    
   }
 }

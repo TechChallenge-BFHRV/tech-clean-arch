@@ -5,5 +5,8 @@ import { Repository } from './repository';
 export abstract class OrderRepository extends Repository<Order> {
   abstract orderStepUpdate(id: number, step: Step): Promise<Order>;
   abstract getOrdersByStatus(status: Status): Promise<Order[]>;
-  abstract setOrderCustomer(orderId: number, customerId: number): Promise<Order>;
+  abstract setOrderCustomer(
+    orderId: number,
+    customerId: number,
+  ): Promise<Order>;
 }

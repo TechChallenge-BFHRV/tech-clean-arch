@@ -4,9 +4,7 @@ import { OrderItemRepository } from '../../../../../adapters/repositories/order-
 import { PrismaService } from '../prisma.service';
 
 @Injectable()
-export class PrismaOrderItemRepository
-  implements OrderItemRepository
-{
+export class PrismaOrderItemRepository implements OrderItemRepository {
   constructor(private readonly prisma: PrismaService) {}
   async create(orderItem: OrderItem): Promise<OrderItem> {
     const createdOrderItem = await this.prisma.orderItems.create({
