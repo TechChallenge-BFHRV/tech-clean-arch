@@ -1,7 +1,6 @@
+# FIAP Tech Challenge 7SOAT / Group 49 - Tech Challenge #2 
 
-# FIAP Tech Challenge 7SOAT - Tech Challenge #2
-
-## Business Process
+## Business Process 
 
 ![Thumbnail of Business Process achieved through Event Storming in Miro](thumbnail.png)
 
@@ -9,9 +8,13 @@
 
 [GitHub Link](https://github.com/TechChallenge-BFHRV/tech-backend)
 
-## Introduction
+## Business Requirements
+A lanchonete precisa de um sistema de controle de pedidos para evitar confusões e garantir a eficiência no atendimento. A lanchonete irá investir em um sistema de autoatendimento de fast food, que é composto por uma série de dispositivos e interfaces que permitem aos clientes selecionar e fazer pedidos sem precisar interagir com um atendente.
 
-Development of an Order system for a restaurant developed with TypeScript, NestJS, Prisma and PostgreSQL.
+## Infrastructure Requirements 
+
+- Docker and Docker Compose
+- Orquestração com Kubernetes (AKS - Azure Kubernetes Service).
 
 ## Members
 
@@ -22,20 +25,27 @@ Development of an Order system for a restaurant developed with TypeScript, NestJ
 - Breno Silva Sobral (Discord: **Breno - RM355234**)
 
 ## Technologies
-
 - Docker
 - Fastify and NestJS
 - Prisma
 - Jest
 - PostgreSQL
+- Kubernetes
+- Bullmq
 - Logging with Winston
 - Prettier (Code formatter), ESLint (Linter)
 
-## Requirements
+## Architectural Drawing
 
-- Docker and Docker Compose
+[Diagrama de Arquitetura](https://boardmix.com/app/share/CAE.CMeILiABKhBUeKNWQzzjVi9r4H6er7h7MAZAAQ/KVN6mY%EF%BC%8C)
 
 ## Documentation
+
+### Project structured in clean architecture, using good practices and agile structures
+
+API documentation is available at Local API Docs once the project is running.
+
+## Collection de APIs
 
 API documentation is available at [Local API Docs](http://localhost:3000/docs) once the project is running.
 
@@ -51,4 +61,7 @@ To run the TECH-BACKEND project on your local machine, follow these steps:
 
 You can import all endpoint configurations from the `/docs` folder into Postman for API testing.
 
+## Vídeo de Demonstração
+
+[Vídeo de Demonstração](https://youtube.com/example)
 
