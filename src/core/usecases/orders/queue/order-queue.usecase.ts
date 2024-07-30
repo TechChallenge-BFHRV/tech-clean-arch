@@ -1,5 +1,5 @@
 import { InjectQueue } from '@nestjs/bull';
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Status } from '@prisma/client';
 import { Queue } from 'bullmq';
 import { OrderRepository } from '../../../../adapters/repositories/order.repository';
@@ -8,7 +8,6 @@ import { OrderRepository } from '../../../../adapters/repositories/order.reposit
 export class OrderQueueUseCase {
   constructor(
     @InjectQueue('order-queue') private readonly orderQueue: Queue,
-    @Inject('OrderRepository')
     private readonly orderRepository: OrderRepository,
   ) {}
 

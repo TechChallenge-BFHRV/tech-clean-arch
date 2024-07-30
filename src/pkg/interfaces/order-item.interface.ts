@@ -4,7 +4,6 @@ export interface OrderItemData {
   id: number;
   orderId: number;
   itemId: number;
-  Item: Item
+  Item: Item;
   isActive?: boolean;
- 
 }

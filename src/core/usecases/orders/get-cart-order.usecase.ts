@@ -7,7 +7,6 @@ import { ConsistOrderUseCase } from './consist-order.usecase';
 @Injectable()
 export class GetCartOrderUseCase implements IUseCase<Order> {
   constructor(
-    
     private readonly orderRepository: OrderRepository,
     private readonly consistOrderUseCase: ConsistOrderUseCase,
   ) {}

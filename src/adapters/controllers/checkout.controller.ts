@@ -5,7 +5,7 @@ import { CreateCheckoutDTO } from 'src/pkg/dtos/create-checkout-dto';
 
 @ApiTags('checkout')
 @Controller('checkout')
-export class checkoutController {
+export class CheckoutController {
   constructor(private readonly createCheckoutUseCase: CreateCheckoutUseCase) {}
 
   @Post()

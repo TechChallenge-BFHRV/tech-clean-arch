@@ -1,14 +1,12 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Order } from '../../../core/entities/orders.entity';
 import { OrderRepository } from '../../../adapters/repositories/order.repository';
 import { IUseCase } from '../usecase';
 
-
-
 @Injectable()
 export class ConsistOrderUseCase implements IUseCase<Order> {
-  constructor(private readonly orderRepository: OrderRepository ) {}
-  
+  constructor(private readonly orderRepository: OrderRepository) {}
+
   async execute(orderId: number): Promise<Order> {
     let order = await this.orderRepository.getById(orderId);
 

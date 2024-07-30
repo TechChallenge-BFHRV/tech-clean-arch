@@ -8,7 +8,7 @@ export class CustomerMapper {
       id: raw.id,
       createdAt: raw.createdAt,
       updatedAt: raw.updatedAt,
-    }
+    };
   }
 
   public static toDTO(entity: Customer): CustomerDTO {

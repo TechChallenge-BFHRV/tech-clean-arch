@@ -8,7 +8,7 @@ RUN yarn install
 
 COPY . .
 
-RUN npx prisma generate
+RUN npx prisma generate && npx prisma migrate deploy && npx ts-node prisma/seed.ts
 
 COPY prisma ./prisma
 

@@ -30,6 +30,10 @@ import { PrismaCheckoutRepository } from './prisma/repositories/checkout.prisma.
       provide: OrderRepository,
       useClass: PrismaOrderRepository,
     },
+    {
+      provide: CheckoutRepository,
+      useClass: PrismaCheckoutRepository,
+    },
   ],
   exports: [
     PrismaService,

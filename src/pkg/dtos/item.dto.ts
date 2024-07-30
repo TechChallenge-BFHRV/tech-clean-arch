@@ -23,7 +23,7 @@ export class ItemDTO {
   price: number;
 
   @ApiProperty({
-    enum: ItemCategory
+    enum: ItemCategory,
   })
   @IsEnum(ItemCategory)
   category: ItemCategory;
