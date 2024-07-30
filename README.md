@@ -47,7 +47,8 @@ To run the TECH-BACKEND project on your local machine, follow these steps:
 2. **Install Dependencies**: Run `yarn install` to install required dependencies.
 3. **Build Containers**: Use `docker-compose build` to build the Docker containers.
 4. **Start Containers**: Execute `docker-compose up -d` to start the containers in detached mode.
-6. **Start the Application**: Use `yarn run start` to start the application.
+6. **Application Access**: It’ll be launched at http://localhost:3000.
+7. **Endpoint Collections**: The Postman endpoint collections are located at /docs in the root project directory.
 
 You can import all endpoint configurations from the `/docs` folder into Postman for API testing.
 
