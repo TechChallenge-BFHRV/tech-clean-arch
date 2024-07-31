@@ -9,4 +9,4 @@ spec:
     name: techchallenge-k8s
   minReplicas: 2
   maxReplicas: 10
-  targetCPUUtilizationPercentage: 80
+  targetCPUUtilizationPercentage: 50
