@@ -37,6 +37,8 @@ A lanchonete precisa de um sistema de controle de pedidos para evitar confusões
 
 ## Architectural Drawing
 
+![Thumbnail of Business Process achieved through Event Storming in Miro](architecture-diagram.png)
+
 [Diagrama de Arquitetura](https://boardmix.com/app/share/CAE.CMeILiABKhBUeKNWQzzjVi9r4H6er7h7MAZAAQ/KVN6mY%EF%BC%8C)
 
 ## Documentation
