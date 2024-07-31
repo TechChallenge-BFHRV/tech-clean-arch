@@ -9,6 +9,7 @@
 [GitHub Link](https://github.com/TechChallenge-BFHRV/tech-backend)
 
 ## Business Requirements
+
 A lanchonete precisa de um sistema de controle de pedidos para evitar confusões e garantir a eficiência no atendimento. A lanchonete irá investir em um sistema de autoatendimento de fast food, que é composto por uma série de dispositivos e interfaces que permitem aos clientes selecionar e fazer pedidos sem precisar interagir com um atendente.
 
 ## Infrastructure Requirements 
@@ -37,15 +38,15 @@ A lanchonete precisa de um sistema de controle de pedidos para evitar confusões
 
 ## Architectural Drawing
 
+![Thumbnail of Business Process achieved through Event Storming in Miro](architecture-diagram.png)
+
 [Diagrama de Arquitetura](https://boardmix.com/app/share/CAE.CMeILiABKhBUeKNWQzzjVi9r4H6er7h7MAZAAQ/KVN6mY%EF%BC%8C)
 
 ## Documentation
 
-### Project structured in clean architecture, using good practices and agile structures
+Project structured with Clean Architecture, minding good practices and SOLID principles
 
-API documentation is available at Local API Docs once the project is running.
-
-## Collection de APIs
+## API Collection
 
 API documentation is available at [Local API Docs](http://localhost:3000/docs) once the project is running.
 
@@ -62,7 +63,7 @@ To run the TECH-BACKEND project on your local machine, follow these steps:
 
 You can import all endpoint configurations from the `/docs` folder into Postman for API testing.
 
-## Vídeo de Demonstração
+## Demo Video
 
 [Vídeo de Demonstração](https://youtube.com/example)
 
