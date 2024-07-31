@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: techchallenge-k8s
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -20,3 +20,6 @@ spec:
           env:
             - name: DATABASE_URL
               value: "postgresql://docker:docker@postgres:5432/techchallenge?schema=public"
+          resources:
+            requests:
+              cpu: 1m

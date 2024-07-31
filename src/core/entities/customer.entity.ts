@@ -1,5 +1,3 @@
-//TO-DO - Atualizar orders e checkout com as entidades
-
 export class Customer {
   id: number;
   createdAt: Date;
