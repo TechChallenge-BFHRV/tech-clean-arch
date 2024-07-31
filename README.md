@@ -1,4 +1,12 @@
-# FIAP Tech Challenge 7SOAT / Group 49 - Tech Challenge #2 
+# FIAP Tech Challenge 7SOAT - Tech Challenge #2
+
+## Group #49 - Members
+
+- Felipe José Cardoso de Sousa (Discord: **Felipe Sousa - RM355595**)
+- Robson Batista da Silva (Discord: **Robson - RM356014**)
+- Vinicius Pereira (Discord: **Vinicius Pereira - RM355809**)
+- Henrique Perez Bego (Discord: **Henrique Bego - RM354844**)
+- Breno Silva Sobral (Discord: **Breno - RM355234**)
 
 ## Business Process 
 
@@ -15,15 +23,7 @@ A lanchonete precisa de um sistema de controle de pedidos para evitar confusões
 ## Infrastructure Requirements 
 
 - Docker and Docker Compose
-- Orquestração com Kubernetes (AKS - Azure Kubernetes Service).
-
-## Members
-
-- Felipe José Cardoso de Sousa (Discord: **Felipe Sousa - RM355595**)
-- Robson Batista da Silva (Discord: **Robson - RM356014**)
-- Vinicius Pereira (Discord: **Vinicius Pereira - RM355809**)
-- Henrique Perez Bego (Discord: **Henrique Bego - RM354844**)
-- Breno Silva Sobral (Discord: **Breno - RM355234**)
+- Orquestração com Kubernetes
 
 ## Technologies
 - Docker
@@ -65,5 +65,5 @@ You can import all endpoint configurations from the `/docs` folder into Postman 
 
 ## Demo Video
 
-[Vídeo de Demonstração](https://youtube.com/example)
+[Link](https://youtube.com/example)
 
