@@ -10,9 +10,7 @@ export class CustomerPrismaRepository implements CustomerRepository {
 
   async create(customer: Customer): Promise<Customer> {
     const prismaCustomer = await this.prisma.customer.create({
-      data: {
-        ...CustomerPrismaMapper.toPrisma(customer),
-      },
+      data: CustomerPrismaMapper.toPrisma(customer),
     });
     return CustomerPrismaMapper.toEntity(prismaCustomer);
   }
