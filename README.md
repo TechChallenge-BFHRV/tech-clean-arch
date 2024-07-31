@@ -14,7 +14,7 @@
 
 [Miro Link](https://miro.com/app/board/uXjVKVo2egw=/)
 
-[GitHub Link](https://github.com/TechChallenge-BFHRV/tech-backend)
+[GitHub Link](https://github.com/TechChallenge-BFHRV/tech-clean-arch)
 
 ## Business Requirements
 
