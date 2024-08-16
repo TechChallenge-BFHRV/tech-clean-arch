@@ -32,6 +32,7 @@ import { CheckoutController } from 'src/adapters/controllers/checkout.controller
 import { BullModule } from '@nestjs/bull';
 import { OrderQueueUseCase } from '../core/usecases/orders/queue/order-queue.usecase';
 import { OrderProcessor } from '../core/usecases/orders/queue/processor/order.processor';
+import { GetCustomerByEmailUseCase } from 'src/core/usecases/customers/get-customer-by-email.use-case';
 
 @Module({
   imports: [
@@ -51,6 +52,7 @@ import { OrderProcessor } from '../core/usecases/orders/queue/processor/order.pr
     CreateCustomerUseCase,
     UpdateCustomerUseCase,
     GetCustomerByCpfUseCase,
+    GetCustomerByEmailUseCase,
     CreateItemUseCase,
     GetItemUseCase,
     GetItemsPerCategoryUseCase,
