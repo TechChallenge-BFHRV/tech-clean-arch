@@ -13,6 +13,7 @@ import { CreateCustomerUseCase } from '../../core/usecases/customers/create-cust
 import { GetCustomerByCpfUseCase } from '../../core/usecases/customers/get-customer-by-cpf.use-case';
 import { SetCustomerCpfUseCase } from '../../core/usecases/customers/set-customer-cpf.use-case';
 import { GetCustomerByEmailUseCase } from 'src/core/usecases/customers/get-customer-by-email.use-case';
+import { SetCustomerEmailUseCase } from '../../core/usecases/customers/set-customer-email.use-case'
 import { CustomerDTO } from '../../pkg/dtos/customer.dto';
 
 @ApiTags('customer')
@@ -23,6 +24,7 @@ export class CustomerController {
     private readonly setCustomerCpfUseCase: SetCustomerCpfUseCase,
     private readonly getCustomerByCpfUseCase: GetCustomerByCpfUseCase,
     private readonly getCustomerByEmailUseCase: GetCustomerByEmailUseCase,
+    private readonly setCustomerEmailUseCase: SetCustomerEmailUseCase
   ) {}
 
   @Post()
@@ -57,6 +59,27 @@ export class CustomerController {
     @Query('cpf') cpf: string,
   ) {
     const updatedCustomer = await this.setCustomerCpfUseCase.execute(id, cpf);
+    return {
+      statusCode: HttpStatus.ACCEPTED,
+      message: 'Customer updated successfully',
+      data: updatedCustomer,
+    };
+  }
+
+  @Put(':customerId/email')
+  @ApiResponse({
+    status: HttpStatus.ACCEPTED,
+    description: 'Customer updated successfully.',
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Invalid input data.',
+  })
+  async setCustomerEmail(
+    @Param('customerId') id: number,
+    @Query('email') email: string,
+  ) {
+    const updatedCustomer = await this.setCustomerEmailUseCase.execute(id, email);
     return {
       statusCode: HttpStatus.ACCEPTED,
       message: 'Customer updated successfully',

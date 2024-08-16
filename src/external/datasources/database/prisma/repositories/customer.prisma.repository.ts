@@ -40,6 +40,17 @@ export class CustomerPrismaRepository implements CustomerRepository {
     return customer;
   }
 
+  async setCustomerEmail(id: number, email: string): Promise<Customer> {
+    const customer = await this.prisma.customer.update({
+      where: { id: id },
+      data: {
+        email: email,
+      },
+    });
+    if (!customer) throw new Error('Customer not found!');
+    return customer;
+  }
+
   async update(id: number, customer: Customer): Promise<Customer> {
     return await this.prisma.customer.update({
       where: { id: id },

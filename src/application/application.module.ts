@@ -33,6 +33,7 @@ import { BullModule } from '@nestjs/bull';
 import { OrderQueueUseCase } from '../core/usecases/orders/queue/order-queue.usecase';
 import { OrderProcessor } from '../core/usecases/orders/queue/processor/order.processor';
 import { GetCustomerByEmailUseCase } from 'src/core/usecases/customers/get-customer-by-email.use-case';
+import { SetCustomerEmailUseCase } from 'src/core/usecases/customers/set-customer-email.use-case';
 
 @Module({
   imports: [
@@ -53,6 +54,7 @@ import { GetCustomerByEmailUseCase } from 'src/core/usecases/customers/get-custo
     UpdateCustomerUseCase,
     GetCustomerByCpfUseCase,
     GetCustomerByEmailUseCase,
+    SetCustomerEmailUseCase,
     CreateItemUseCase,
     GetItemUseCase,
     GetItemsPerCategoryUseCase,
