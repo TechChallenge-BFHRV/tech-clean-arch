@@ -15,8 +15,10 @@ export class GetIdaasCustomerByEmailUseCase implements IUseCase<Customer> {
       console.log('user does not exist on cognito userpool');
     }
     if (idaasRequest && idaasRequest.Enabled) {
+      console.log('User FOUND on cognito!')
       const cognitoCpfObjectAttribute = idaasRequest.UserAttributes.find(el => el.Name === 'custom:cpf');
       if (cognitoCpfObjectAttribute && cognitoCpfObjectAttribute.Value) {
+        console.log('User CPF on Cognito is: ', cognitoCpfObjectAttribute.Value);
       }
 
     }
