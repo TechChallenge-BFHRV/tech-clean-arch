@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ApiGatewayInterface } from '../../adapters/interfaces/api-gateway';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
+import { Customer } from 'src/core/entities/customer.entity';
 
 @Injectable()
 export class ApiGatewayService implements ApiGatewayInterface {
@@ -15,6 +16,12 @@ export class ApiGatewayService implements ApiGatewayInterface {
         }
     };
     const response = await firstValueFrom(this.httpService.get(`${this.apiUrl}/retrieve`, payload));
+    return response.data;
+  }
+
+  async createUser(user: Customer): Promise<any> {
+    const payload = user;
+    const response = await firstValueFrom(this.httpService.post(`${this.apiUrl}/create`, payload));
     return response.data;
   }
 }

@@ -34,6 +34,8 @@ import { OrderQueueUseCase } from '../core/usecases/orders/queue/order-queue.use
 import { OrderProcessor } from '../core/usecases/orders/queue/processor/order.processor';
 import { GetCustomerByEmailUseCase } from 'src/core/usecases/customers/get-customer-by-email.use-case';
 import { SetCustomerEmailUseCase } from 'src/core/usecases/customers/set-customer-email.use-case';
+import { CreateIdaasCustomerUseCase } from 'src/core/usecases/customers/create-idaas-customer.use-case';
+import { GetIdaasCustomerByEmailUseCase } from 'src/core/usecases/customers/get-idaas-customer-by-email.use-case';
 
 @Module({
   imports: [
@@ -55,6 +57,8 @@ import { SetCustomerEmailUseCase } from 'src/core/usecases/customers/set-custome
     GetCustomerByCpfUseCase,
     GetCustomerByEmailUseCase,
     SetCustomerEmailUseCase,
+    CreateIdaasCustomerUseCase,
+    GetIdaasCustomerByEmailUseCase,
     CreateItemUseCase,
     GetItemUseCase,
     GetItemsPerCategoryUseCase,
