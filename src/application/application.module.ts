@@ -25,17 +25,17 @@ import { SetOrderToCancelledUseCase } from '../core/usecases/orders/set-order-to
 import { SetOrderToFinishedUseCase } from '../core/usecases/orders/set-order-to-finished.usecase';
 import { SetOrderToPrepareUseCase } from '../core/usecases/orders/set-order-to-prepare.usecase';
 import { SetOrderToReadyUseCase } from '../core/usecases/orders/set-order-to-ready.usecase';
-import { SetCustomerCpfUseCase } from 'src/core/usecases/customers/set-customer-cpf.use-case';
-import { IntegrationModule } from 'src/external/integrations/integration.module';
-import { CreateCheckoutUseCase } from 'src/core/usecases/checkouts/create-checkout.usecase';
-import { CheckoutController } from 'src/adapters/controllers/checkout.controller';
+import { SetCustomerCpfUseCase } from '../core/usecases/customers/set-customer-cpf.use-case';
+import { IntegrationModule } from '../external/integrations/integration.module';
+import { CreateCheckoutUseCase } from '../core/usecases/checkouts/create-checkout.usecase';
+import { CheckoutController } from '../adapters/controllers/checkout.controller';
 import { BullModule } from '@nestjs/bull';
 import { OrderQueueUseCase } from '../core/usecases/orders/queue/order-queue.usecase';
 import { OrderProcessor } from '../core/usecases/orders/queue/processor/order.processor';
-import { GetCustomerByEmailUseCase } from 'src/core/usecases/customers/get-customer-by-email.use-case';
-import { SetCustomerEmailUseCase } from 'src/core/usecases/customers/set-customer-email.use-case';
-import { CreateIdaasCustomerUseCase } from 'src/core/usecases/customers/create-idaas-customer.use-case';
-import { GetIdaasCustomerByEmailUseCase } from 'src/core/usecases/customers/get-idaas-customer-by-email.use-case';
+import { GetCustomerByEmailUseCase } from '../core/usecases/customers/get-customer-by-email.use-case';
+import { SetCustomerEmailUseCase } from '../core/usecases/customers/set-customer-email.use-case';
+import { CreateIdaasCustomerUseCase } from '../core/usecases/customers/create-idaas-customer.use-case';
+import { GetIdaasCustomerByEmailUseCase } from '../core/usecases/customers/get-idaas-customer-by-email.use-case';
 
 @Module({
   imports: [

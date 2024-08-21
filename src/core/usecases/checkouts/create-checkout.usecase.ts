@@ -3,10 +3,10 @@ import { CheckoutStatus, Status, Step } from '@prisma/client';
 import { ConsistOrderUseCase } from '../orders/consist-order.usecase';
 import { OrderQueueUseCase } from '../orders/queue/order-queue.usecase';
 import { IUseCase } from '../usecase';
-import { Checkout } from 'src/core/entities/checkout.entity';
-import { CheckoutRepository } from 'src/adapters/repositories/checkout.repository';
-import { OrderRepository } from 'src/adapters/repositories/order.repository';
-import { PaymentGateway } from 'src/adapters/interfaces/payment-gateway';
+import { Checkout } from '../../../core/entities/checkout.entity';
+import { CheckoutRepository } from '../../../adapters/repositories/checkout.repository';
+import { OrderRepository } from '../../../adapters/repositories/order.repository';
+import { PaymentGateway } from '../../../adapters/interfaces/payment-gateway';
 
 @Injectable()
 export class CreateCheckoutUseCase implements IUseCase<Checkout> {

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { FakePaymentGatewayAdapter } from './fake-payment-gateway';
-import { PaymentGateway } from 'src/adapters/interfaces/payment-gateway';
+import { PaymentGateway } from '../../adapters/interfaces/payment-gateway';
 import { ApiGatewayService } from './api-gateway-service';
 import { HttpModule } from '@nestjs/axios';
 

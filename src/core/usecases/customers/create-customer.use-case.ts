@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CustomerRepository } from '../../../adapters/repositories/customer.repository';
 import { IUseCase } from '../usecase';
 import { Customer } from '../../entities/customer.entity';
-import { CustomerMapper } from 'src/adapters/mappers/customer.mapper';
+import { CustomerMapper } from '../../../adapters/mappers/customer.mapper';
 
 @Injectable()
 export class CreateCustomerUseCase implements IUseCase<Customer> {

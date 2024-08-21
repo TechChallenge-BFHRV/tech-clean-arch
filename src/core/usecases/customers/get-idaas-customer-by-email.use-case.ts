@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { IUseCase } from '../usecase';
 import { Customer } from '../../entities/customer.entity';
-import { ApiGatewayService } from 'src/external/integrations/api-gateway-service';
+import { ApiGatewayService } from '../../../external/integrations/api-gateway-service';
 
 @Injectable()
 export class GetIdaasCustomerByEmailUseCase implements IUseCase<Customer> {

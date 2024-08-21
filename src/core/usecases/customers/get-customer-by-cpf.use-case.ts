@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CustomerRepository } from 'src/adapters/repositories/customer.repository';
+import { CustomerRepository } from '../../../adapters/repositories/customer.repository';
 import { IUseCase } from '../usecase';
 import { Customer } from '../../entities/customer.entity';
 import { CreateCustomerUseCase } from './create-customer.use-case';
-import { CustomerDTO } from 'src/pkg/dtos/customer.dto';
+import { CustomerDTO } from '../../../pkg/dtos/customer.dto';
 import { SetCustomerCpfUseCase } from './set-customer-cpf.use-case';
 
 @Injectable()
