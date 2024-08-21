@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CustomerRepository } from 'src/adapters/repositories/customer.repository';
+import { CustomerRepository } from '../../../../../adapters/repositories/customer.repository';
 import { PrismaService } from '../prisma.service';
 import { Customer } from '../../../../../core/entities/customer.entity';
 import { CustomerPrismaMapper } from '../mappers/customer.prisma.mapper';
