@@ -36,7 +36,7 @@ CMD yarn run start:prod
 # Test stage
 FROM node:18-alpine AS test
 ENV NODE_ENV=test
-RUN yarn install --frozen-lockfile
+RUN yarn install
 USER node
 COPY . .
 RUN yarn run test
