@@ -3,7 +3,7 @@ import { IUseCase } from '../usecase';
 import { OrderItem } from '../../../core/entities/order-items.entity';
 import { OrderItemRepository } from '../../../adapters/repositories/order-item.repository';
 import { AddItemToOrderDTO } from '../../../pkg/dtos/add-item-to-order-dto';
-import { OrderItemMapper } from 'src/adapters/mappers/order-item.mapper';
+import { OrderItemMapper } from '../../../adapters/mappers/order-item.mapper';
 
 @Injectable()
 export class AddItemToOrderUseCase implements IUseCase<OrderItem> {

@@ -1,7 +1,7 @@
 import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateCheckoutUseCase } from 'src/core/usecases/checkouts/create-checkout.usecase';
-import { CreateCheckoutDTO } from 'src/pkg/dtos/create-checkout-dto';
+import { CreateCheckoutUseCase } from '../../core/usecases/checkouts/create-checkout.usecase';
+import { CreateCheckoutDTO } from '../../pkg/dtos/create-checkout-dto';
 
 @ApiTags('checkout')
 @Controller('checkout')
