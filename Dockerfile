@@ -12,7 +12,7 @@ RUN npx prisma generate
 
 COPY prisma ./prisma
 
-RUN yarn run test
+RUN npx run jest
 
 
 FROM node:18-alpine AS development
