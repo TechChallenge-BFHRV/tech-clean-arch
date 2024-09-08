@@ -36,7 +36,7 @@ CMD yarn run start:prod
 # Test stage
 FROM node:18-alpine AS test
 ENV NODE_ENV=test
-RUN npm ci --include=dev
+RUN yarn install --frozen-lockfile
 USER node
 COPY . .
 RUN yarn run test
