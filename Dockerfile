@@ -1,3 +1,20 @@
+FROM node:18-alpine AS test
+
+WORKDIR /usr/src/techchallenge-app
+
+COPY package*.json ./
+
+RUN yarn install
+
+COPY . .
+
+RUN npx prisma generate
+
+COPY prisma ./prisma
+
+RUN yarn run test
+
+
 FROM node:18-alpine AS development
 
 WORKDIR /usr/src/techchallenge-app
@@ -31,12 +48,3 @@ COPY . .
 COPY --from=development /usr/src/techchallenge-app/dist ./dist
 RUN npx prisma generate
 CMD yarn run start:prod
-
-
-# Test stage
-FROM node:18-alpine AS test
-ENV NODE_ENV=test
-RUN yarn install
-USER node
-COPY . .
-RUN yarn run test
