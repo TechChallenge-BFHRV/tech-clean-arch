@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CustomerRepository } from 'src/adapters/repositories/customer.repository';
+import { CustomerRepository } from '../../../../../adapters/repositories/customer.repository';
 import { PrismaService } from '../prisma.service';
 import { Customer } from '../../../../../core/entities/customer.entity';
 import { CustomerPrismaMapper } from '../mappers/customer.prisma.mapper';
@@ -30,6 +30,25 @@ export class CustomerPrismaRepository implements CustomerRepository {
         cpf: cpf,
       },
     });
+  }
+
+  async getCustomerByEmail(email: string): Promise<Customer> {
+    const customer = await this.prisma.customer.findUnique({
+      where: { email: email },
+    });
+    if (!customer) throw new Error('Customer not found!');
+    return customer;
+  }
+
+  async setCustomerEmail(id: number, email: string): Promise<Customer> {
+    const customer = await this.prisma.customer.update({
+      where: { id: id },
+      data: {
+        email: email,
+      },
+    });
+    if (!customer) throw new Error('Customer not found!');
+    return customer;
   }
 
   async update(id: number, customer: Customer): Promise<Customer> {

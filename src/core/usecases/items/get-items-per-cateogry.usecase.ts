@@ -4,7 +4,7 @@ import { Item } from '../../entities/item.entity';
 import { ItemCategory } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
 import { ItemDTO } from '../../../pkg/dtos/item.dto';
-import { ItemMapper } from 'src/adapters/mappers/item.mapper';
+import { ItemMapper } from '../../../adapters/mappers/item.mapper';
 
 @Injectable()
 export class GetItemsPerCategoryUseCase implements IUseCase<Item[]> {
