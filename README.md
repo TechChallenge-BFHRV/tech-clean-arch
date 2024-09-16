@@ -71,7 +71,7 @@ You can import all endpoint configurations from the `/docs` folder into Postman 
 
 You need to have the Azure CLI installed in your local environment.
 
-1. Use your credentials to log in to your azure account
+1. Use your credentials to log in to your azure account with `az login`
 2. Ensure you're logged in requesting your AKS containers in Azure with: `az aks list`
 3. If you receive a successful response, continue, otherwise make sure you're connected to the Azure CLI
 4. Run `terraform apply`
@@ -84,6 +84,6 @@ You need to have the Azure CLI installed in your local environment.
 11. Run `kubectl apply -f k8s/redis-deployment.yaml`
 12. Run `kubectl apply -f k8s/deployment.yaml`
 13. Run `kubectl apply -f k8s/service.yaml`
-14. Run `kubectl get svc` and use the `EXTERNAL-IP` address of the `techchallenge-k8s LoadBalancer` in the following format: `external-ip-numbers:3000/docs` in your browser
+14. Run `kubectl get svc` and use the `EXTERNAL-IP` address of the `techchallenge-k8s LoadBalancer` in the following format: `http://external-ip-address:3000/docs` in your browser
 15. You are now accessing the cleanarch-techchallenge Swagger
 
