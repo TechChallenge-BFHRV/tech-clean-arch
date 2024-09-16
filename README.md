@@ -84,6 +84,6 @@ You need to have the Azure CLI installed in your local environment.
 11. Run `kubectl apply -f k8s/redis-deployment.yaml`
 12. Run `kubectl apply -f k8s/deployment.yaml`
 13. Run `kubectl apply -f k8s/service.yaml`
-14. Run `kubectl get svc` and use the `EXTERNAL-IP` address of the `techchallenge-k8s LoadBalancer` in the following format: `http://external-ip-address:3000/docs` in your browser
+14. Run `kubectl get services` and use the `EXTERNAL-IP` address of the `techchallenge-k8s LoadBalancer` in the following format: `http://external-ip-address:3000/docs` in your browser
 15. You are now accessing the cleanarch-techchallenge Swagger
-
+16. Run `terraform destroy` to shut down the infrastructure
