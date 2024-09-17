@@ -36,6 +36,10 @@ A lanchonete precisa de um sistema de controle de pedidos para evitar confusões
 - Logging with Winston
 - Prettier (Code formatter), ESLint (Linter)
 
+## Project Design
+
+![Thumbnail of Business Process achieved through Event Storming in Miro](terraform-architecture.png)
+
 ## Architectural Drawing
 
 ![Thumbnail of Business Process achieved through Event Storming in Miro](architecture-diagram.png)
