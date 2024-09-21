@@ -7,7 +7,8 @@ import { Customer } from 'src/core/entities/customer.entity';
 @Injectable()
 export class ApiGatewayService implements ApiGatewayInterface {
   constructor(private readonly httpService: HttpService) {}
-  private readonly apiUrl = 'https://wc8gw3zxgj.execute-api.us-east-1.amazonaws.com/dev/totem-userpool';
+  private readonly dynamicApiGateway = process.env.API_GATEWAY_URL
+  private readonly apiUrl = this.dynamicApiGateway || 'https://httpbin.org/anything';
 
   async getUser(username: string): Promise<any> {
     const payload = {
