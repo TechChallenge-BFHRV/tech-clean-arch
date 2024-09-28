@@ -30,7 +30,7 @@ A lanchonete precisa de um sistema de controle de pedidos para evitar confusões
 - Fastify and NestJS
 - Prisma
 - Jest
-- PostgreSQL
+- PostgreSQL in AWS RDS
 - Kubernetes
 - Bullmq
 - Logging with Winston
