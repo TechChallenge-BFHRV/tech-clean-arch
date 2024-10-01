@@ -5,9 +5,7 @@ import { ApiGatewayService } from '../../../external/integrations/api-gateway-se
 
 @Injectable()
 export class CreateIdaasCustomerUseCase implements IUseCase<Customer> {
-  constructor(
-    private apiGateway: ApiGatewayService,
-  ) {}
+  constructor(private apiGateway: ApiGatewayService) {}
 
   async execute(customer: Customer): Promise<any> {
     const idaasCreatedCustomer = await this.apiGateway.createUser(customer);

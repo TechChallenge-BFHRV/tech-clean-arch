@@ -7,4 +7,5 @@ export interface CustomerData {
   updatedAt: Date;
   orders?: any;
   checkout?: any;
+  authId?: string;
 }

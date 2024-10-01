@@ -5,9 +5,7 @@ import { Customer } from '../../entities/customer.entity';
 
 @Injectable()
 export class GetCustomerByEmailUseCase implements IUseCase<Customer> {
-  constructor(
-    private customerRepository: CustomerRepository,
-  ) {}
+  constructor(private customerRepository: CustomerRepository) {}
 
   async execute(email: string): Promise<Customer> {
     const customer = await this.customerRepository.getCustomerByEmail(email);

@@ -19,9 +19,14 @@ export class GetCustomerByCpfUseCase implements IUseCase<Customer> {
       const customer = await this.customerRepository.getCustomerByCpf(cpf);
       return customer;
     } catch (error) {
-      const newCustomer = await this.createCustomerUseCase.execute(new CustomerDTO);
+      const newCustomer = await this.createCustomerUseCase.execute(
+        new CustomerDTO(),
+      );
       if (newCustomer && newCustomer.id) {
-        const updatedCustomerCPF = await this.setCustomerCpfUseCase.execute(newCustomer.id, cpf);
+        const updatedCustomerCPF = await this.setCustomerCpfUseCase.execute(
+          newCustomer.id,
+          cpf,
+        );
         return updatedCustomerCPF;
         // Now email is MANDATORY for Cognito
       }

@@ -13,7 +13,7 @@ import { CreateCustomerUseCase } from '../../core/usecases/customers/create-cust
 import { GetCustomerByCpfUseCase } from '../../core/usecases/customers/get-customer-by-cpf.use-case';
 import { SetCustomerCpfUseCase } from '../../core/usecases/customers/set-customer-cpf.use-case';
 import { GetCustomerByEmailUseCase } from '../../core/usecases/customers/get-customer-by-email.use-case';
-import { SetCustomerEmailUseCase } from '../../core/usecases/customers/set-customer-email.use-case'
+import { SetCustomerEmailUseCase } from '../../core/usecases/customers/set-customer-email.use-case';
 import { CustomerDTO } from '../../pkg/dtos/customer.dto';
 
 @ApiTags('customer')
@@ -24,7 +24,7 @@ export class CustomerController {
     private readonly setCustomerCpfUseCase: SetCustomerCpfUseCase,
     private readonly getCustomerByCpfUseCase: GetCustomerByCpfUseCase,
     private readonly getCustomerByEmailUseCase: GetCustomerByEmailUseCase,
-    private readonly setCustomerEmailUseCase: SetCustomerEmailUseCase
+    private readonly setCustomerEmailUseCase: SetCustomerEmailUseCase,
   ) {}
 
   @Post()
@@ -79,7 +79,10 @@ export class CustomerController {
     @Param('customerId') id: number,
     @Query('email') email: string,
   ) {
-    const updatedCustomer = await this.setCustomerEmailUseCase.execute(id, email);
+    const updatedCustomer = await this.setCustomerEmailUseCase.execute(
+      id,
+      email,
+    );
     return {
       statusCode: HttpStatus.ACCEPTED,
       message: 'Customer updated successfully',

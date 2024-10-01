@@ -56,6 +56,7 @@ export class CustomerPrismaRepository implements CustomerRepository {
       where: { id: id },
       data: {
         cpf: customer.cpf,
+        authId: customer.authId,
       },
     });
   }

@@ -11,6 +11,7 @@ export class CustomerMapper {
       cpf: raw.cpf,
       createdAt: raw.createdAt,
       updatedAt: raw.updatedAt,
+      authId: raw.authId,
     };
   }
 
@@ -24,6 +25,7 @@ export class CustomerMapper {
       updatedAt: entity.updatedAt,
       orders: entity.orders,
       checkout: entity.checkout,
+      authId: entity.authId,
     };
   }
 }
