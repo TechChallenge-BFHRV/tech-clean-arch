@@ -31,7 +31,7 @@ A lanchonete precisa de um sistema de controle de pedidos para evitar confusões
 - Orquestração com Kubernetes
 
 ## Technologies
-- Docker
+- Docker and DockerHub
 - Fastify and NestJS
 - Prisma
 - Jest
@@ -57,10 +57,11 @@ API documentation is available at [Local API Docs](http://localhost:3000/docs) o
 
 ## Getting started
 
-To run the TECH-BACKEND project on your local machine, follow these steps:
+Ideally, the project should be running in AWS and Azure with the help of Terraform.
+
+To run the TECH-BACKEND project on your local machine, follow these steps (you need a public AWS RDS PostgreSQL endpoint):
 
 1. **Environment Setup**: Create a `.env` file based on the provided `.env.example` template.
-2. **Install Dependencies**: Run `yarn install` to install required dependencies.
 3. **Build Containers**: Use `docker-compose build` to build the Docker containers.
 4. **Start Containers**: Execute `docker-compose up -d` to start the containers in detached mode.
 6. **Application Access**: It’ll be launched at http://localhost:3000.
@@ -70,5 +71,5 @@ You can import all endpoint configurations from the `/docs` folder into Postman 
 
 ## Demo Videos
 
-[Vídeo Fase 2](https://vimeo.com/992555215?share=copy)
-[Vídeo Fase 3](https://drive.google.com/drive/folders/1HwQPyS4O-nf2JKiHMG9BpDswYYKz_pte?usp=drive_link)
+- [Vídeo Fase 2](https://vimeo.com/992555215?share=copy)
+- [Vídeo Fase 3](https://drive.google.com/drive/folders/1HwQPyS4O-nf2JKiHMG9BpDswYYKz_pte?usp=drive_link)
