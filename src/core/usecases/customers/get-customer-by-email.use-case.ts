@@ -4,10 +4,11 @@ import { IUseCase } from '../usecase';
 import { Customer } from '../../entities/customer.entity';
 
 @Injectable()
-export class UpdateCustomerUseCase implements IUseCase<Customer> {
+export class GetCustomerByEmailUseCase implements IUseCase<Customer> {
   constructor(private customerRepository: CustomerRepository) {}
 
-  async execute(id: number, customer: Customer): Promise<Customer> {
-    return await this.customerRepository.update(id, customer);
+  async execute(email: string): Promise<Customer> {
+    const customer = await this.customerRepository.getCustomerByEmail(email);
+    return customer;
   }
 }

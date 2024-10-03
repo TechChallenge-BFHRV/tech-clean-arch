@@ -7,6 +7,8 @@ export class Customer {
   cpf?: string;
   orders?: any;
   checkout?: any;
+  authId?: string;
+
   constructor(
     id: number,
     createdAt: Date,
@@ -16,6 +18,7 @@ export class Customer {
     cpf?: string,
     orders?: any,
     checkout?: any,
+    authId?: string,
   ) {
     this.id = id;
     this.email = email;
@@ -25,5 +28,6 @@ export class Customer {
     this.updatedAt = updatedAt;
     this.orders = orders;
     this.checkout = checkout;
+    this.authId = authId;
   }
 }

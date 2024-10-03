@@ -1,4 +1,5 @@
-# FIAP Tech Challenge 7SOAT - Tech Challenge #2
+# FIAP Tech Challenge 7SOAT
+# Tech Challenge #3
 
 ## Group #49 - Members
 
@@ -8,6 +9,14 @@
 - Henrique Perez Bego (Discord: **Henrique Bego - RM354844**)
 - Breno Silva Sobral (Discord: **Breno - RM355234**)
 
+## Business Requirements
+
+A lanchonete precisa de um sistema de controle de pedidos para evitar confusões e garantir a eficiência no atendimento. A lanchonete irá investir em um sistema de autoatendimento de fast food, que é composto por uma série de dispositivos e interfaces que permitem aos clientes selecionar e fazer pedidos sem precisar interagir com um atendente.
+
+## Project Design
+
+![Thumbnail of Business Process achieved through Event Storming in Miro](terraform-architecture.png)
+
 ## Business Process 
 
 ![Thumbnail of Business Process achieved through Event Storming in Miro](thumbnail.png)
@@ -15,10 +24,6 @@
 [Miro Link](https://miro.com/app/board/uXjVKVo2egw=/)
 
 [GitHub Link](https://github.com/TechChallenge-BFHRV/tech-clean-arch)
-
-## Business Requirements
-
-A lanchonete precisa de um sistema de controle de pedidos para evitar confusões e garantir a eficiência no atendimento. A lanchonete irá investir em um sistema de autoatendimento de fast food, que é composto por uma série de dispositivos e interfaces que permitem aos clientes selecionar e fazer pedidos sem precisar interagir com um atendente.
 
 ## Infrastructure Requirements 
 
@@ -30,7 +35,7 @@ A lanchonete precisa de um sistema de controle de pedidos para evitar confusões
 - Fastify and NestJS
 - Prisma
 - Jest
-- PostgreSQL
+- PostgreSQL in AWS RDS
 - Kubernetes
 - Bullmq
 - Logging with Winston
@@ -63,7 +68,7 @@ To run the TECH-BACKEND project on your local machine, follow these steps:
 
 You can import all endpoint configurations from the `/docs` folder into Postman for API testing.
 
-## Demo Video
+## Demo Videos
 
-[Vídeo de Demonstração](https://vimeo.com/992555215?share=copy)
-
+[Vídeo Fase 2](https://vimeo.com/992555215?share=copy)
+[Vídeo Fase 3](https://drive.google.com/drive/folders/1HwQPyS4O-nf2JKiHMG9BpDswYYKz_pte?usp=drive_link)

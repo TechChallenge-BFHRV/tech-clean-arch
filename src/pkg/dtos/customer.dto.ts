@@ -17,6 +17,10 @@ export class CustomerDTO {
   @IsString()
   cpf: string;
 
+  @IsOptional()
+  @IsString()
+  authId?: string;
+
   @ValidateNested({ each: true })
   orders: any[];
 

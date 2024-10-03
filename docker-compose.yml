@@ -13,22 +13,7 @@ services:
       - /usr/src/techchallenge-app/node_modules
     command: sh -c "npx prisma generate && npx prisma migrate deploy && npx prisma db seed && npm run start:dev"
     depends_on:
-      - database-db
       - redis
-    networks:
-      - app-network
-
-  database-db:
-    image: 'bitnami/postgresql'
-    container_name: database-db2
-    environment:
-      - POSTGRESQL_USERNAME=docker
-      - POSTGRESQL_PASSWORD=docker
-      - POSTGRESQL_DATABASE=techchallenge
-    ports:
-      - 5434:5432
-    volumes:
-      - 'postgresql_data:/bitnami/postgresql'
     networks:
       - app-network
 
@@ -39,10 +24,6 @@ services:
       - 6379:6379
     networks:
       - app-network
-
-volumes:
-  postgresql_data:
-    driver: local
 
 networks:
   app-network:

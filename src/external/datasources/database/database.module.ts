@@ -8,7 +8,7 @@ import { OrderItemRepository } from '../../../adapters/repositories/order-item.r
 import { OrderRepository } from '../../../adapters/repositories/order.repository';
 import { PrismaOrderItemRepository } from './prisma/repositories/order-item.prisma.repository';
 import { PrismaOrderRepository } from './prisma/repositories/order.prisma.repository';
-import { CheckoutRepository } from 'src/adapters/repositories/checkout.repository';
+import { CheckoutRepository } from '../../../adapters/repositories/checkout.repository';
 import { PrismaCheckoutRepository } from './prisma/repositories/checkout.prisma.repository';
 
 @Module({
