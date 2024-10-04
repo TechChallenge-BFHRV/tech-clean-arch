@@ -1,4 +1,5 @@
-import { Status, Step } from '@prisma/client';
+import { Status } from '../entities/status.entity';
+import { Step } from '@prisma/client';
 import { OrderItem } from './order-items.entity';
 
 export class Order {
