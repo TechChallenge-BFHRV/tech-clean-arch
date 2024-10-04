@@ -3,7 +3,7 @@ import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ItemCategory } from '../../core/entities/item-categories.entity';
 import { CreateItemUseCase } from '../../core/usecases/items/create-item.usecase';
 import { GetItemUseCase } from '../../core/usecases/items/get-item.usecase';
-import { GetItemsPerCategoryUseCase } from '../../core/usecases/items/get-items-per-cateogry.usecase';
+import { GetItemsPerCategoryUseCase } from '../../core/usecases/items/get-items-per-category.usecase';
 import { ItemDTO } from '../../pkg/dtos/item.dto';
 
 @ApiTags('item')

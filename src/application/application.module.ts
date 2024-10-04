@@ -6,7 +6,7 @@ import { DatabaseModule } from '../external/datasources/database/database.module
 import { CustomerController } from '../adapters/controllers/customer.controller';
 import { CreateItemUseCase } from '../core/usecases/items/create-item.usecase';
 import { GetItemUseCase } from '../core/usecases/items/get-item.usecase';
-import { GetItemsPerCategoryUseCase } from '../core/usecases/items/get-items-per-cateogry.usecase';
+import { GetItemsPerCategoryUseCase } from '../core/usecases/items/get-items-per-category.usecase';
 import { ItemController } from '../adapters/controllers/item.controller';
 import { OrderController } from '../adapters/controllers/order.controller';
 
