@@ -1,4 +1,4 @@
-import { Item } from '@prisma/client';
+import { Item } from '../entities/item.entity';
 
 export class OrderItem {
   id: number;
