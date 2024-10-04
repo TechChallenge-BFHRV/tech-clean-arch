@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Status } from 'src/core/entities/status.entity';
-import { Step } from '@prisma/client';
+import { Step } from '../../../../../core/entities/step.entity';
 import { Order } from '../../../../../core/entities/orders.entity';
 import { OrderRepository } from '../../../../../adapters/repositories/order.repository';
 import { PrismaService } from '../prisma.service';
