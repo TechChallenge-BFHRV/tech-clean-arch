@@ -21,6 +21,7 @@ export class PrismaOrderRepository implements OrderRepository {
   }
 
   async update(id: number, data: Order): Promise<Order> {
+    const updatedOrder = await this.prisma.order.update({
       where: { id: id },
       data: {
         totalPrice: data.totalPrice,
