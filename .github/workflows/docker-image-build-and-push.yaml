@@ -24,3 +24,4 @@ jobs:
         - name: push the docker image
           id: push-docker-image
           run: docker push ${{secrets.DOCKERHUB_USERNAME}}/techchallenge-k8s:latest
+          if: github.ref == 'refs/heads/main'
