@@ -1,4 +1,4 @@
-import { ItemCategory } from '@prisma/client';
+import { ItemCategory } from '../../core/entities/item-categories.entity';
 
 export interface ItemData {
   id: number;

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Status, Step } from '@prisma/client';
+import { Status } from 'src/core/entities/status.entity';
+import { Step } from '../../../../../core/entities/step.entity';
 import { Order } from '../../../../../core/entities/orders.entity';
 import { OrderRepository } from '../../../../../adapters/repositories/order.repository';
 import { PrismaService } from '../prisma.service';
@@ -19,8 +20,8 @@ export class PrismaOrderRepository implements OrderRepository {
     return createdOrder;
   }
 
-  update(id: number, data: Order): Promise<Order> {
-    const updatedOrder = this.prisma.order.update({
+  async update(id: number, data: Order): Promise<Order> {
+    const updatedOrder = await this.prisma.order.update({
       where: { id: id },
       data: {
         totalPrice: data.totalPrice,

@@ -1,4 +1,4 @@
-import { Item } from '@prisma/client';
+import { Item } from '../../core/entities/item.entity';
 
 export interface OrderItemData {
   id: number;

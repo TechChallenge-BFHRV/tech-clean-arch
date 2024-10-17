@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Item } from '@prisma/client';
+import { Item } from '../../core/entities/item.entity';
 import { IsNumber } from 'class-validator';
 
 export class AddItemToOrderDTO {

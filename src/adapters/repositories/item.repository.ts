@@ -1,4 +1,4 @@
-import { ItemCategory } from '@prisma/client';
+import { ItemCategory } from '../../core/entities/item-categories.entity';
 import { Repository } from './repository';
 import { Item } from '../../core/entities/item.entity';
 

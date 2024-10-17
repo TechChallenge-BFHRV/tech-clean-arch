@@ -9,7 +9,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags, ApiParam } from '@nestjs/swagger';
-import { Status } from '@prisma/client';
+import { Status } from '../../core/entities/status.entity';
 import { AddItemToOrderDTO } from '../../pkg/dtos/add-item-to-order-dto';
 
 import { GetCartOrderUseCase } from '../../core/usecases/orders/get-cart-order.usecase';

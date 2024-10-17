@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Step } from '@prisma/client';
+import { Step } from '../../entities/step.entity';
 import { Order } from '../../../core/entities/orders.entity';
 import { OrderRepository } from '../../../adapters/repositories/order.repository';
 import { IUseCase } from '../usecase';

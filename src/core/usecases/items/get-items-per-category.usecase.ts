@@ -1,7 +1,7 @@
 import { IUseCase } from '../usecase';
 import { ItemRepository } from '../../../adapters/repositories/item.repository';
 import { Item } from '../../entities/item.entity';
-import { ItemCategory } from '@prisma/client';
+import { ItemCategory } from '../../entities/item-categories.entity';
 import { Injectable } from '@nestjs/common';
 import { ItemDTO } from '../../../pkg/dtos/item.dto';
 import { ItemMapper } from '../../../adapters/mappers/item.mapper';

@@ -1,6 +1,6 @@
 import { InjectQueue } from '@nestjs/bull';
 import { Injectable } from '@nestjs/common';
-import { Status } from '@prisma/client';
+import { Status } from '../../../entities/status.entity';
 import { Queue } from 'bullmq';
 import { OrderRepository } from '../../../../adapters/repositories/order.repository';
 
