@@ -63,10 +63,10 @@ export class OrderController {
       statusCode: HttpStatus.OK,
       message: 'List of all orders retrieved successfully',
       data: allOrders.map((el) => {
-        const estimatedTime =
+        const estimatedTime = el ?
           new Date(
-            el?.InProgressTimestamp?.getTime() + el?.preparationTime * 1000,
-          ) ?? null;
+            el.InProgressTimestamp?.getTime() + el.preparationTime * 1000,
+          ) : null;
 
         return {
           id: el.id,
