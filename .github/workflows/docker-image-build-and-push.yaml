@@ -20,8 +20,8 @@ jobs:
           id: build-docker-image
           run: |
             ls -la 
-            docker build . -f Dockerfile -t viniciusdeliz/techchallenge-k8s:latest
+            docker build . -f Dockerfile -t viniciusdeliz/techchallenge-k8s:main
         - name: push the docker image
           id: push-docker-image
-          run: docker push ${{secrets.DOCKERHUB_USERNAME}}/techchallenge-k8s:latest
+          run: docker push ${{secrets.DOCKERHUB_USERNAME}}/techchallenge-k8s:main
           if: github.ref == 'refs/heads/main'

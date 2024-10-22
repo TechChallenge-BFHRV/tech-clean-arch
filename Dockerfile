@@ -30,4 +30,4 @@ COPY . .
 
 COPY --from=development /usr/src/techchallenge-app/dist ./dist
 RUN npx prisma generate
-CMD yarn run start:prod
+CMD [ "yarn", "run", "start:prod" ]
