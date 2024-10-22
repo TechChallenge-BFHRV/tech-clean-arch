@@ -22,8 +22,8 @@ spec:
             requests:
               memory: "256Mi"
               cpu: "250m"
-              storage: "1Gi"
+              ephemeral-storage: "512Mi"
             limits:
               memory: "512Mi"
               cpu: "500m"
-              storage: "32Gi"
+              ephemeral-storage: "8Gi"

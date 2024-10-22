@@ -63,10 +63,10 @@ export class OrderController {
       statusCode: HttpStatus.OK,
       message: 'List of all orders retrieved successfully',
       data: allOrders.map((el) => {
-        const estimatedTime =
+        const estimatedTime = el ?
           new Date(
-            el?.InProgressTimestamp?.getTime() + el?.preparationTime * 1000,
-          ) ?? null;
+            el.InProgressTimestamp?.getTime() + el.preparationTime * 1000,
+          ) : null;
 
         return {
           id: el.id,
@@ -108,10 +108,10 @@ export class OrderController {
         data: order,
       };
     }
-    const estimatedTime =
+    const estimatedTime = order ?
       new Date(
-        order?.InProgressTimestamp?.getTime() + order?.preparationTime * 1000,
-      ) ?? null;
+        order.InProgressTimestamp?.getTime() + order.preparationTime * 1000,
+      ) : null;
 
     return {
       statusCode: HttpStatus.OK,
@@ -286,10 +286,10 @@ export class OrderController {
       message: `Orders succesffully retrieved by status ${orderStatus}.`,
       amountOfOrders: orders.length,
       data: orders.map((el) => {
-        const estimatedTime =
+        const estimatedTime = el ?
           new Date(
-            el?.InProgressTimestamp?.getTime() + el?.preparationTime * 1000,
-          ) ?? null;
+            el.InProgressTimestamp?.getTime() + el.preparationTime * 1000,
+          ) : null;
 
         return {
           ...el,
