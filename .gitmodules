@@ -1,0 +1,3 @@
+[submodule "items-microservice"]
+	path = items-microservice
+	url = https://github.com/TechChallenge-BFHRV/items-microservice
