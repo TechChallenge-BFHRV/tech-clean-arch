@@ -36,9 +36,14 @@ import { GetCustomerByEmailUseCase } from '../core/usecases/customers/get-custom
 import { SetCustomerEmailUseCase } from '../core/usecases/customers/set-customer-email.use-case';
 import { CreateIdaasCustomerUseCase } from '../core/usecases/customers/create-idaas-customer.use-case';
 import { GetIdaasCustomerByEmailUseCase } from '../core/usecases/customers/get-idaas-customer-by-email.use-case';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
+    ClientsModule.register([{
+      name: 'ITEMS_MICROSERVICE',
+      transport: Transport.TCP,
+    }]),
     forwardRef(() => DatabaseModule),
     forwardRef(() => IntegrationModule),
     BullModule.forRoot({

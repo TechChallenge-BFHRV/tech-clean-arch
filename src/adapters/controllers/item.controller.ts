@@ -1,15 +1,17 @@
-import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Inject, Param, Post } from '@nestjs/common';
 import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ItemCategory } from '../../core/entities/item-categories.entity';
 import { CreateItemUseCase } from '../../core/usecases/items/create-item.usecase';
 import { GetItemUseCase } from '../../core/usecases/items/get-item.usecase';
 import { GetItemsPerCategoryUseCase } from '../../core/usecases/items/get-items-per-category.usecase';
 import { ItemDTO } from '../../pkg/dtos/item.dto';
+import { ClientProxy } from '@nestjs/microservices';
 
 @ApiTags('item')
 @Controller('item')
 export class ItemController {
   constructor(
+    @Inject('ITEMS_MICROSERVICE') private readonly itemMicroserviceClient: ClientProxy,
     private readonly createItemUseCase: CreateItemUseCase,
     private readonly getItemUseCase: GetItemUseCase,
     private readonly getItemsPerCategoryUseCase: GetItemsPerCategoryUseCase,
@@ -43,6 +45,7 @@ export class ItemController {
     description: 'Something went wrong retrieving the items.',
   })
   async getItems() {
+    this.itemMicroserviceClient.emit('get_all_items', {});
     const allItems = await this.getItemUseCase.execute();
     return {
       statusCode: HttpStatus.OK,
