@@ -6,6 +6,7 @@ import { GetItemUseCase } from '../../core/usecases/items/get-item.usecase';
 import { GetItemsPerCategoryUseCase } from '../../core/usecases/items/get-items-per-category.usecase';
 import { ItemDTO } from '../../pkg/dtos/item.dto';
 import { ClientProxy } from '@nestjs/microservices';
+import { lastValueFrom } from 'rxjs';
 
 @ApiTags('item')
 @Controller('item')
@@ -27,12 +28,9 @@ export class ItemController {
     description: 'Invalid input data.',
   })
   async createItem(@Body() item: ItemDTO) {
-    const itemCreated = await this.createItemUseCase.execute(item);
-    return {
-      statusCode: HttpStatus.CREATED,
-      message: 'Item created successfully',
-      data: itemCreated,
-    };
+    const res = this.itemMicroserviceClient.send('create_item', { ...item });
+    const val = await lastValueFrom(res);
+    return val;
   }
 
   @Get()
@@ -45,7 +43,9 @@ export class ItemController {
     description: 'Something went wrong retrieving the items.',
   })
   async getItems() {
-    this.itemMicroserviceClient.emit('get_all_items', {});
+    const req = this.itemMicroserviceClient.send('get_all_items', {});
+    const val = await lastValueFrom(req);
+    console.log('val is: ', val);
     const allItems = await this.getItemUseCase.execute();
     return {
       statusCode: HttpStatus.OK,
