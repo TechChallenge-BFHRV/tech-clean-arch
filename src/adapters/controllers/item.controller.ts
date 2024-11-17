@@ -62,12 +62,8 @@ export class ItemController {
     enum: ItemCategory,
   })
   async getItemsPerCategory(@Param('itemCategory') category: ItemCategory) {
-    const categoryItems =
-      await this.getItemsPerCategoryUseCase.execute(category);
-    return {
-      statusCode: HttpStatus.OK,
-      message: `${category} items retrieved successfully. Total: ${categoryItems.length}`,
-      data: categoryItems,
-    };
+    const req = this.itemMicroserviceClient.send('get_items_per_category', category);
+    const val = await lastValueFrom(req);
+    return val;
   }
 }
