@@ -45,13 +45,7 @@ export class ItemController {
   async getItems() {
     const req = this.itemMicroserviceClient.send('get_all_items', {});
     const val = await lastValueFrom(req);
-    console.log('val is: ', val);
-    const allItems = await this.getItemUseCase.execute();
-    return {
-      statusCode: HttpStatus.OK,
-      message: 'All items retrieved successfully',
-      data: allItems,
-    };
+    return val;
   }
 
   @Get('category/:itemCategory')
