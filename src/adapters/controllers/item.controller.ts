@@ -1,9 +1,6 @@
 import { Body, Controller, Get, HttpStatus, Inject, Param, Post } from '@nestjs/common';
 import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ItemCategory } from '../../core/entities/item-categories.entity';
-import { CreateItemUseCase } from '../../core/usecases/items/create-item.usecase';
-import { GetItemUseCase } from '../../core/usecases/items/get-item.usecase';
-import { GetItemsPerCategoryUseCase } from '../../core/usecases/items/get-items-per-category.usecase';
 import { ItemDTO } from '../../pkg/dtos/item.dto';
 import { ClientProxy } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
@@ -13,9 +10,6 @@ import { lastValueFrom } from 'rxjs';
 export class ItemController {
   constructor(
     @Inject('ITEMS_MICROSERVICE') private readonly itemMicroserviceClient: ClientProxy,
-    private readonly createItemUseCase: CreateItemUseCase,
-    private readonly getItemUseCase: GetItemUseCase,
-    private readonly getItemsPerCategoryUseCase: GetItemsPerCategoryUseCase,
   ) {}
 
   @Post()
