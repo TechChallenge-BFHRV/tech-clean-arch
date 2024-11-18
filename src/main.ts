@@ -18,7 +18,7 @@ import { AppModule } from './app.module';
 import { PROJECT_NAME, PROJECT_DESCRIPTION, PROJECT_VERSION } from './config';
 import HttpExceptionFilter from './exceptions/http-exception.filter';
 
-const DEFAULT_PORT = 3000;
+const DEFAULT_PORT = 3001;
 const DEFAULT_API_PREFIX = '/api';
 const DEFAULT_API_VERSION = '1';
 const DEFAULT_SWAGGER_PREFIX = '/docs';
