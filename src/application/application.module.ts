@@ -4,9 +4,6 @@ import { GetCustomerByCpfUseCase } from '../core/usecases/customers/get-customer
 import { UpdateCustomerUseCase } from '../core/usecases/customers/update-customer.use-case';
 import { DatabaseModule } from '../external/datasources/database/database.module';
 import { CustomerController } from '../adapters/controllers/customer.controller';
-import { CreateItemUseCase } from '../core/usecases/items/create-item.usecase';
-import { GetItemUseCase } from '../core/usecases/items/get-item.usecase';
-import { GetItemsPerCategoryUseCase } from '../core/usecases/items/get-items-per-category.usecase';
 import { ItemController } from '../adapters/controllers/item.controller';
 import { OrderController } from '../adapters/controllers/order.controller';
 
@@ -64,9 +61,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     SetCustomerEmailUseCase,
     CreateIdaasCustomerUseCase,
     GetIdaasCustomerByEmailUseCase,
-    CreateItemUseCase,
-    GetItemUseCase,
-    GetItemsPerCategoryUseCase,
     AddItemToOrderUseCase,
     ConsistOrderUseCase,
     CreateOrderUseCase,
@@ -91,9 +85,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     CreateCustomerUseCase,
     UpdateCustomerUseCase,
     GetCustomerByCpfUseCase,
-    CreateItemUseCase,
-    GetItemUseCase,
-    GetItemsPerCategoryUseCase,
     AddItemToOrderUseCase,
     ConsistOrderUseCase,
     CreateOrderUseCase,
