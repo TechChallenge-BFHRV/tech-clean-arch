@@ -7,5 +7,5 @@ spec:
     app: techchallenge-k8s
   ports:
     - protocol: TCP
-      port: 3000
+      port: 3001
   type: LoadBalancer
