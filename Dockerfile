@@ -8,6 +8,9 @@ RUN yarn install
 
 COPY . .
 
+# Remove items-microservice submodule content from main backend
+RUN rm -rf items-microservice
+
 RUN npx prisma generate
 
 COPY prisma ./prisma

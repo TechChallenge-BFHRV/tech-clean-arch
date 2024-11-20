@@ -35,11 +35,18 @@ import { CreateIdaasCustomerUseCase } from '../core/usecases/customers/create-id
 import { GetIdaasCustomerByEmailUseCase } from '../core/usecases/customers/get-idaas-customer-by-email.use-case';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
+const ITEMS_MICROSERVICE_HOST = process.env.ITEMS_SERVICE_HOST || 'localhost';
+const ITEMS_MICROSERVICE_PORT = parseInt(process.env.ITEMS_SERVICE_PORT, 10) || 3000;
+
 @Module({
   imports: [
     ClientsModule.register([{
       name: 'ITEMS_MICROSERVICE',
       transport: Transport.TCP,
+      options: {
+        host: ITEMS_MICROSERVICE_HOST,
+        port: ITEMS_MICROSERVICE_PORT,
+      }
     }]),
     forwardRef(() => DatabaseModule),
     forwardRef(() => IntegrationModule),
