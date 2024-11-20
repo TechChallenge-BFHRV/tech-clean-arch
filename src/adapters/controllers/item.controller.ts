@@ -1,18 +1,15 @@
-import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Inject, Param, Post } from '@nestjs/common';
 import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ItemCategory } from '../../core/entities/item-categories.entity';
-import { CreateItemUseCase } from '../../core/usecases/items/create-item.usecase';
-import { GetItemUseCase } from '../../core/usecases/items/get-item.usecase';
-import { GetItemsPerCategoryUseCase } from '../../core/usecases/items/get-items-per-category.usecase';
 import { ItemDTO } from '../../pkg/dtos/item.dto';
+import { ClientProxy } from '@nestjs/microservices';
+import { lastValueFrom } from 'rxjs';
 
 @ApiTags('item')
 @Controller('item')
 export class ItemController {
   constructor(
-    private readonly createItemUseCase: CreateItemUseCase,
-    private readonly getItemUseCase: GetItemUseCase,
-    private readonly getItemsPerCategoryUseCase: GetItemsPerCategoryUseCase,
+    @Inject('ITEMS_MICROSERVICE') private readonly itemMicroserviceClient: ClientProxy,
   ) {}
 
   @Post()
@@ -25,12 +22,9 @@ export class ItemController {
     description: 'Invalid input data.',
   })
   async createItem(@Body() item: ItemDTO) {
-    const itemCreated = await this.createItemUseCase.execute(item);
-    return {
-      statusCode: HttpStatus.CREATED,
-      message: 'Item created successfully',
-      data: itemCreated,
-    };
+    const res = this.itemMicroserviceClient.send('create_item', { ...item });
+    const val = await lastValueFrom(res);
+    return val;
   }
 
   @Get()
@@ -43,12 +37,9 @@ export class ItemController {
     description: 'Something went wrong retrieving the items.',
   })
   async getItems() {
-    const allItems = await this.getItemUseCase.execute();
-    return {
-      statusCode: HttpStatus.OK,
-      message: 'All items retrieved successfully',
-      data: allItems,
-    };
+    const req = this.itemMicroserviceClient.send('get_all_items', {});
+    const val = await lastValueFrom(req);
+    return val;
   }
 
   @Get('category/:itemCategory')
@@ -65,12 +56,8 @@ export class ItemController {
     enum: ItemCategory,
   })
   async getItemsPerCategory(@Param('itemCategory') category: ItemCategory) {
-    const categoryItems =
-      await this.getItemsPerCategoryUseCase.execute(category);
-    return {
-      statusCode: HttpStatus.OK,
-      message: `${category} items retrieved successfully. Total: ${categoryItems.length}`,
-      data: categoryItems,
-    };
+    const req = this.itemMicroserviceClient.send('get_items_per_category', category);
+    const val = await lastValueFrom(req);
+    return val;
   }
 }

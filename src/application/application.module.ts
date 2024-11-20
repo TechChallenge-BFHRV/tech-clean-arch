@@ -4,9 +4,6 @@ import { GetCustomerByCpfUseCase } from '../core/usecases/customers/get-customer
 import { UpdateCustomerUseCase } from '../core/usecases/customers/update-customer.use-case';
 import { DatabaseModule } from '../external/datasources/database/database.module';
 import { CustomerController } from '../adapters/controllers/customer.controller';
-import { CreateItemUseCase } from '../core/usecases/items/create-item.usecase';
-import { GetItemUseCase } from '../core/usecases/items/get-item.usecase';
-import { GetItemsPerCategoryUseCase } from '../core/usecases/items/get-items-per-category.usecase';
 import { ItemController } from '../adapters/controllers/item.controller';
 import { OrderController } from '../adapters/controllers/order.controller';
 
@@ -36,9 +33,21 @@ import { GetCustomerByEmailUseCase } from '../core/usecases/customers/get-custom
 import { SetCustomerEmailUseCase } from '../core/usecases/customers/set-customer-email.use-case';
 import { CreateIdaasCustomerUseCase } from '../core/usecases/customers/create-idaas-customer.use-case';
 import { GetIdaasCustomerByEmailUseCase } from '../core/usecases/customers/get-idaas-customer-by-email.use-case';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+
+const ITEMS_MICROSERVICE_HOST = process.env.ITEMS_SERVICE_HOST || 'localhost';
+const ITEMS_MICROSERVICE_PORT = parseInt(process.env.ITEMS_SERVICE_PORT, 10) || 3000;
 
 @Module({
   imports: [
+    ClientsModule.register([{
+      name: 'ITEMS_MICROSERVICE',
+      transport: Transport.TCP,
+      options: {
+        host: ITEMS_MICROSERVICE_HOST,
+        port: ITEMS_MICROSERVICE_PORT,
+      }
+    }]),
     forwardRef(() => DatabaseModule),
     forwardRef(() => IntegrationModule),
     BullModule.forRoot({
@@ -59,9 +68,6 @@ import { GetIdaasCustomerByEmailUseCase } from '../core/usecases/customers/get-i
     SetCustomerEmailUseCase,
     CreateIdaasCustomerUseCase,
     GetIdaasCustomerByEmailUseCase,
-    CreateItemUseCase,
-    GetItemUseCase,
-    GetItemsPerCategoryUseCase,
     AddItemToOrderUseCase,
     ConsistOrderUseCase,
     CreateOrderUseCase,
@@ -86,9 +92,6 @@ import { GetIdaasCustomerByEmailUseCase } from '../core/usecases/customers/get-i
     CreateCustomerUseCase,
     UpdateCustomerUseCase,
     GetCustomerByCpfUseCase,
-    CreateItemUseCase,
-    GetItemUseCase,
-    GetItemsPerCategoryUseCase,
     AddItemToOrderUseCase,
     ConsistOrderUseCase,
     CreateOrderUseCase,

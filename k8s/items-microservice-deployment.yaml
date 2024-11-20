@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: techchallenge-items-microservice
+spec:
+  selector:
+    matchLabels:
+      app: techchallenge-items-microservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: techchallenge-items-microservice
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: techchallenge-k8s
+          image: viniciusdeliz/techchallenge-items-microservice:main
+          ports: 
+            - containerPort: 3000
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://docker:docker@postgres:5432/techchallenge?schema=public"
+          resources:
+            requests:
+              cpu: 1m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: techchallenge-items-microservice
+  labels:
+    app: techchallenge-items-microservice
+spec:
+  selector:
+    app: techchallenge-items-microservice
+  ports:
+    - protocol: TCP
+      port: 3000 # The port that other services will use to access it
+      targetPort: 3000 # The port exposed by the container
+  type: ClusterIP # Internal communication within the cluster
