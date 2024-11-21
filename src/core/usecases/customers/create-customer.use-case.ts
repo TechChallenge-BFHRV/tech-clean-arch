@@ -9,9 +9,9 @@ import { GetIdaasCustomerByEmailUseCase } from './get-idaas-customer-by-email.us
 @Injectable()
 export class CreateCustomerUseCase implements IUseCase<Customer> {
   constructor(
-    private customerRepository: CustomerRepository,
-    private createIdaasCustomerUseCase: CreateIdaasCustomerUseCase,
-    private getIdaasCustomerByEmailUseCase: GetIdaasCustomerByEmailUseCase,
+    private readonly customerRepository: CustomerRepository,
+    private readonly createIdaasCustomerUseCase: CreateIdaasCustomerUseCase,
+    private readonly getIdaasCustomerByEmailUseCase: GetIdaasCustomerByEmailUseCase,
   ) {}
 
   async execute(customer: Customer): Promise<Customer> {

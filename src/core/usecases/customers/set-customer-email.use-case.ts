@@ -10,8 +10,8 @@ import { CustomerMapper } from 'src/adapters/mappers/customer.mapper';
 export class SetCustomerEmailUseCase implements IUseCase<Customer> {
   constructor(
     private readonly customerRepository: CustomerRepository,
-    private createIdaasCustomerUseCase: CreateIdaasCustomerUseCase,
-    private getIdaasCustomerByEmailUseCase: GetIdaasCustomerByEmailUseCase,
+    private readonly createIdaasCustomerUseCase: CreateIdaasCustomerUseCase,
+    private readonly getIdaasCustomerByEmailUseCase: GetIdaasCustomerByEmailUseCase,
   ) {}
 
   async execute(id: number, email: string): Promise<Customer> {
