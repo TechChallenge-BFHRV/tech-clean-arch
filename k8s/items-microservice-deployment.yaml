@@ -16,11 +16,17 @@ spec:
       containers:
         - name: techchallenge-k8s
           image: viniciusdeliz/techchallenge-items-microservice:main
+          limits:
+            memory: "512Mi"
+            ephemeral-storage: "2Gi"
           ports: 
             - containerPort: 3000
           env:
             - name: DATABASE_URL
-              value: "postgresql://docker:docker@postgres:5432/techchallenge?schema=public"
+              valueFrom:
+                configMapKeyRef:
+                  name: my-config
+                  key: ITEMS_MICROSERVICE_DATABASE_URL
           resources:
             requests:
               cpu: 1m
