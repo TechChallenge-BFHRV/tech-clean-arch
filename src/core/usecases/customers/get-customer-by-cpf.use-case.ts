@@ -9,9 +9,9 @@ import { SetCustomerCpfUseCase } from './set-customer-cpf.use-case';
 @Injectable()
 export class GetCustomerByCpfUseCase implements IUseCase<Customer> {
   constructor(
-    private customerRepository: CustomerRepository,
-    private createCustomerUseCase: CreateCustomerUseCase,
-    private setCustomerCpfUseCase: SetCustomerCpfUseCase,
+    private readonly customerRepository: CustomerRepository,
+    private readonly createCustomerUseCase: CreateCustomerUseCase,
+    private readonly setCustomerCpfUseCase: SetCustomerCpfUseCase,
   ) {}
 
   async execute(cpf: string): Promise<Customer> {
