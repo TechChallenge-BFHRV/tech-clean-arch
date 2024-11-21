@@ -16,6 +16,9 @@ spec:
       containers:
         - name: techchallenge-k8s
           image: viniciusdeliz/techchallenge-items-microservice:main
+          limits:
+            memory: "512Mi"
+            ephemeral-storage: "2Gi"
           ports: 
             - containerPort: 3000
           env:
