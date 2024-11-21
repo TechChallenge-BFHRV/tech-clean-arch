@@ -69,6 +69,19 @@ To run the TECH-BACKEND project on your local machine, follow these steps (you n
 
 You can import all endpoint configurations from the `/docs` folder into Postman for API testing.
 
+## Local Kubernetes Environment
+
+1. Generate a config map based on your local `.env` file with the command `kubectl create configmap my-config --from-env-file=.env`
+2. Run `kubectl apply -f k8s/deployment.yaml`
+3. Run `kubectl apply -f k8s/item-microservice-postgres-deployment.yaml`
+4. Run `kubectl apply -f k8s/item-microservice-deployment.yaml`
+5. Run `kubectl apply -f k8s/redis-deployment.yaml`
+6. Run `kubectl apply -f k8s/service.yaml`
+7. Execute `kubectl get services`
+8. Get the external port from the techchallenge-k8s and then in your browser navigate to `http://localhost:ExternalPort`
+
+To delete the pods run `kubectl delete -f k8s/filename.yaml`
+
 ## Demo Videos
 
 - [Vídeo Fase 2](https://vimeo.com/992555215?share=copy)

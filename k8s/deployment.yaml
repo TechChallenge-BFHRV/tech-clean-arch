@@ -24,7 +24,10 @@ spec:
             - name: ITEMS_SERVICE_PORT
               value: "3000"
             - name: DATABASE_URL
-              value: "postgresql://docker:dockerTech@postgres-db.clcbfwtduu8h.us-east-1.rds.amazonaws.com:5432/techchallenge?schema=public"
+              valueFrom:
+                configMapKeyRef:
+                  name: my-config
+                  key: DATABASE_URL
           resources:
             requests:
               memory: "256Mi"
