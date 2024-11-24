@@ -41,7 +41,7 @@ const ITEMS_MICROSERVICE_HOST = process.env.ITEMS_SERVICE_HOST || 'localhost';
 const ITEMS_MICROSERVICE_PORT = parseInt(process.env.ITEMS_SERVICE_PORT, 10) || 3000;
 
 const CHECKOUT_MICROSERVICE_HOST = process.env.CHECKOUT_SERVICE_HOST || 'localhost';
-const CHECKOUT_MICROSERVICE_PORT = parseInt(process.env.CHECKOUT_SERVICE_PORT, 11) || 3001;
+const CHECKOUT_MICROSERVICE_PORT = parseInt(process.env.CHECKOUT_SERVICE_PORT, 10) || 3002;
 
 
 @Module({
