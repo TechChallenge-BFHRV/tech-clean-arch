@@ -1,12 +1,12 @@
 import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateCheckoutUseCase } from '../../core/usecases/checkouts/create-checkout.usecase';
+import { ExternalCheckoutService } from '../../external/integrations/external-checkout-service';
 import { CreateCheckoutDTO } from '../../pkg/dtos/create-checkout-dto';
 
 @ApiTags('checkout')
 @Controller('checkout')
 export class CheckoutController {
-  constructor(private readonly createCheckoutUseCase: CreateCheckoutUseCase) {}
+  constructor(private readonly externalCheckoutService: ExternalCheckoutService) {}
 
   @Post()
   @ApiResponse({
@@ -17,15 +17,7 @@ export class CheckoutController {
     status: HttpStatus.BAD_REQUEST,
     description: 'Payment cannot be processed.',
   })
-  async createCheckout(@Body() createCheckout: CreateCheckoutDTO) {
-    const checkout = await this.createCheckoutUseCase.execute(createCheckout);
-    const isSuccess = checkout.status === 'APPROVED';
-    return {
-      statusCode: isSuccess ? HttpStatus.OK : HttpStatus.BAD_REQUEST,
-      message: isSuccess
-        ? 'Payment processed successfully.'
-        : 'Payment cannot be processed.',
-      data: checkout,
-    };
+  async createCheckout(@Body() createCheckoutDTO: CreateCheckoutDTO) {
+    return await this.externalCheckoutService.createCheckout(createCheckoutDTO);
   }
 }

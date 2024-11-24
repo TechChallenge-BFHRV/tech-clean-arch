@@ -35,9 +35,14 @@ import { CreateIdaasCustomerUseCase } from '../core/usecases/customers/create-id
 import { GetIdaasCustomerByEmailUseCase } from '../core/usecases/customers/get-idaas-customer-by-email.use-case';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ExternalItemService } from '../external/integrations/external-item-service';
+import { ExternalCheckoutService } from '../external/integrations/external-checkout-service';
 
 const ITEMS_MICROSERVICE_HOST = process.env.ITEMS_SERVICE_HOST || 'localhost';
 const ITEMS_MICROSERVICE_PORT = parseInt(process.env.ITEMS_SERVICE_PORT, 10) || 3000;
+
+const CHECKOUT_MICROSERVICE_HOST = process.env.CHECKOUT_SERVICE_HOST || 'localhost';
+const CHECKOUT_MICROSERVICE_PORT = parseInt(process.env.CHECKOUT_SERVICE_PORT, 11) || 3001;
+
 
 @Module({
   imports: [
@@ -48,7 +53,16 @@ const ITEMS_MICROSERVICE_PORT = parseInt(process.env.ITEMS_SERVICE_PORT, 10) || 
         host: ITEMS_MICROSERVICE_HOST,
         port: ITEMS_MICROSERVICE_PORT,
       }
-    }]),
+    },
+    {
+      name: 'CHECKOUT_MICROSERVICE',
+      transport: Transport.TCP,
+      options: {
+        host: CHECKOUT_MICROSERVICE_HOST,
+        port: CHECKOUT_MICROSERVICE_PORT,
+      },
+    },
+  ]),
     forwardRef(() => DatabaseModule),
     forwardRef(() => IntegrationModule),
     BullModule.forRoot({
@@ -89,6 +103,7 @@ const ITEMS_MICROSERVICE_PORT = parseInt(process.env.ITEMS_SERVICE_PORT, 10) || 
     OrderQueueUseCase,
     OrderProcessor,
     ExternalItemService,
+    ExternalCheckoutService
   ],
   exports: [
     CreateCustomerUseCase,
