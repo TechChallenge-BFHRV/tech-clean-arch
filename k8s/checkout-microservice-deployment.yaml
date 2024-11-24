@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: techchallenge-checkout-microservice
+spec:
+  selector:
+    matchLabels:
+      app: techchallenge-checkout-microservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: techchallenge-checkout-microservice
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: techchallenge-k8s
+          image: rbatista1306/techchallenge-checkout-microservice:main
+          ports: 
+            - containerPort: 3001
+          resources:
+            requests:
+              cpu: 1m
+              memory: "256Mi"
+              ephemeral-storage: "500Mi"
+            limits:
+              memory: "512Mi"
+              ephemeral-storage: "2Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: techchallenge-checkout-microservice
+  labels:
+    app: techchallenge-checkout-microservice
+spec:
+  selector:
+    app: techchallenge-checkout-microservice
+  ports:
+    - protocol: TCP
+      port: 3001 # The port that other services will use to access it
+      targetPort: 3001 # The port exposed by the container
+  type: ClusterIP # Internal communication within the cluster
