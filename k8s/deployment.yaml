@@ -23,6 +23,10 @@ spec:
               value: techchallenge-items-microservice
             - name: ITEMS_SERVICE_PORT
               value: "3000"
+            - name: CHECKOUT_SERVICE_HOST
+              value: techchallenge-checkout-microservice
+            - name: CHECKOUT_SERVICE_PORT
+              value: "3002"
             - name: DATABASE_URL
               valueFrom:
                 configMapKeyRef:
