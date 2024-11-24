@@ -42,9 +42,6 @@ export class PrismaOrderRepository implements OrderRepository {
       include: {
         orderItems: {
           where: { isActive: true },
-          include: {
-            Item: true,
-          },
         },
       },
     });
@@ -56,9 +53,6 @@ export class PrismaOrderRepository implements OrderRepository {
       include: {
         orderItems: {
           where: { isActive: true },
-          include: {
-            Item: true,
-          },
         },
       },
     });

@@ -34,6 +34,7 @@ import { SetCustomerEmailUseCase } from '../core/usecases/customers/set-customer
 import { CreateIdaasCustomerUseCase } from '../core/usecases/customers/create-idaas-customer.use-case';
 import { GetIdaasCustomerByEmailUseCase } from '../core/usecases/customers/get-idaas-customer-by-email.use-case';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ExternalItemService } from '../external/integrations/external-item-service';
 
 const ITEMS_MICROSERVICE_HOST = process.env.ITEMS_SERVICE_HOST || 'localhost';
 const ITEMS_MICROSERVICE_PORT = parseInt(process.env.ITEMS_SERVICE_PORT, 10) || 3000;
@@ -87,6 +88,7 @@ const ITEMS_MICROSERVICE_PORT = parseInt(process.env.ITEMS_SERVICE_PORT, 10) || 
     CreateCheckoutUseCase,
     OrderQueueUseCase,
     OrderProcessor,
+    ExternalItemService,
   ],
   exports: [
     CreateCustomerUseCase,
