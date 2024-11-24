@@ -14,8 +14,8 @@ model Customer {
   name      String?
   cpf       String?    @unique
   authId    String?
-  createdAt DateTime?   @default(now())
-  updatedAt DateTime?   @updatedAt
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @updatedAt
   orders    Order[]
   Checkout  Checkout[]
 }
@@ -30,7 +30,6 @@ model Item {
   category        ItemCategory
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
-  orderItems      OrderItems[]
 }
 
 model OrderItems {
@@ -40,7 +39,6 @@ model OrderItems {
   isActive Boolean @default(true)
 
   Order Order @relation(fields: [orderId], references: [id])
-  Item  Item  @relation(fields: [itemId], references: [id])
 }
 
 model Order {

@@ -2,14 +2,13 @@ import { Body, Controller, Get, HttpStatus, Inject, Param, Post } from '@nestjs/
 import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ItemCategory } from '../../core/entities/item-categories.entity';
 import { ItemDTO } from '../../pkg/dtos/item.dto';
-import { ClientProxy } from '@nestjs/microservices';
-import { lastValueFrom } from 'rxjs';
+import { ExternalItemService } from '../../external/integrations/external-item-service';
 
 @ApiTags('item')
 @Controller('item')
 export class ItemController {
   constructor(
-    @Inject('ITEMS_MICROSERVICE') private readonly itemMicroserviceClient: ClientProxy,
+    private readonly itemService: ExternalItemService,
   ) {}
 
   @Post()
@@ -22,9 +21,7 @@ export class ItemController {
     description: 'Invalid input data.',
   })
   async createItem(@Body() item: ItemDTO) {
-    const res = this.itemMicroserviceClient.send('create_item', { ...item });
-    const val = await lastValueFrom(res);
-    return val;
+    return this.itemService.createItem(item);
   }
 
   @Get()
@@ -37,9 +34,7 @@ export class ItemController {
     description: 'Something went wrong retrieving the items.',
   })
   async getItems() {
-    const req = this.itemMicroserviceClient.send('get_all_items', {});
-    const val = await lastValueFrom(req);
-    return val;
+    return this.itemService.getItems();
   }
 
   @Get('category/:itemCategory')
@@ -56,8 +51,22 @@ export class ItemController {
     enum: ItemCategory,
   })
   async getItemsPerCategory(@Param('itemCategory') category: ItemCategory) {
-    const req = this.itemMicroserviceClient.send('get_items_per_category', category);
-    const val = await lastValueFrom(req);
-    return val;
+    return this.itemService.getItemsPerCategory(category);
+  }
+
+  @Get(':itemId')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Item successfully retrieved by ID.',
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Item not found.',
+  })
+  @ApiParam({
+    name: 'itemId'
+  })
+  async getItemById(@Param('itemId') id: number) {
+    return this.itemService.getItemById(id);
   }
 }
