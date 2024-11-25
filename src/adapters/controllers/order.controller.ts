@@ -27,7 +27,6 @@ import { SetItemToOrderUseCase } from '../../core/usecases/order-items/set-item.
 import { CreateOrderUseCase } from '../../core/usecases/orders/create-order-usecase';
 import { GetOrderByIdUseCase } from '../../core/usecases/orders/get-order-by-id.usecase';
 import { SetOrderCustomerUseCase } from '../../core/usecases/orders/set-order-customer.usecase';
-import { ExternalItemService } from '../../external/integrations/external-item-service';
 
 @ApiTags('order')
 @Controller('order')
@@ -47,7 +46,6 @@ export class OrderController {
     private readonly setOrderToFinishedUseCase: SetOrderToFinishedUseCase,
     private readonly setOrderToCancelledUseCase: SetOrderToCancelledUseCase,
     private readonly setOrderCustomerUseCase: SetOrderCustomerUseCase,
-    private readonly itemService: ExternalItemService,
   ) {}
 
   @Get()
