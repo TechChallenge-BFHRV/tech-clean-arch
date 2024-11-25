@@ -6,6 +6,7 @@ import { OrderRepository } from '../../adapters/repositories/order.repository';
 import { GetOrderByIdUseCase } from 'src/core/usecases/orders/get-order-by-id.usecase';
 import { Status } from '../../core/entities/status.entity';
 import { Step } from '../../core/entities/step.entity';
+import { ConsistOrderUseCase } from '../../core/usecases/orders/consist-order.usecase';
 
 @Injectable()
 export class ExternalCheckoutService {
@@ -13,9 +14,11 @@ export class ExternalCheckoutService {
     @Inject('CHECKOUT_MICROSERVICE') private readonly checkoutMicroserviceClient: ClientProxy,
     private readonly orderRepository: OrderRepository,
     private readonly getOrderByIdUseCase: GetOrderByIdUseCase,
+    private readonly consistOrderUseCase: ConsistOrderUseCase,
   ) {}
 
   async createCheckout(createCheckoutDTO: CreateCheckoutDTO) {
+    await this.consistOrderUseCase.execute(createCheckoutDTO.orderId);
     const order = await this.getOrderByIdUseCase.execute(createCheckoutDTO.orderId);
 
     if (order.status !== 'STARTED') {
@@ -25,15 +28,20 @@ export class ExternalCheckoutService {
     if (order.orderItems.some((item) => item.isActive) === false) {
       throw new Error('Order must have at least one item to create a checkout');
     }
+    order.step = Step.CHECKOUT;
+    await this.orderRepository.update(order.id, order);
 
     const response = this.checkoutMicroserviceClient.send('create_checkout', createCheckoutDTO);
     const val = await lastValueFrom(response);
+  
     if (val && val.data) {
       order.status = val.data.status;
       order.step = Step.PAYMENT_REQUEST;
       await this.orderRepository.update(order.id, order);
+  
       if (val.data.status === 'PENDING') {
-        this.processCheckout(val.data._id, order.finalPrice);
+        const finalRes = await this.processCheckout(val.data._id, order.finalPrice);
+        return finalRes;
       }
     }
     return val;
@@ -48,6 +56,7 @@ export class ExternalCheckoutService {
     }
     if (processVal.data.status === 'APPROVED') {
       order.status = Status.APPROVED;
+      order.step = Step.COMPLETED;
     }
     await this.orderRepository.update(order.id, order);
     return processVal;
