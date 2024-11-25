@@ -15,9 +15,15 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: techchallenge-k8s
-          image: rbatista1306/techchallenge-checkout-microservice:main
+          image: viniciusdeliz/techchallenge-checkout-microservice:main
           ports: 
             - containerPort: 3002
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: my-config
+                  key: CHECKOUT_MICROSERVICE_DATABASE_URL
           resources:
             requests:
               cpu: 1m
