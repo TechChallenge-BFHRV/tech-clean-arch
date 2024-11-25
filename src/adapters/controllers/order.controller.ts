@@ -115,23 +115,6 @@ export class OrderController {
         order.InProgressTimestamp?.getTime() + order.preparationTime * 1000,
       ) : null;
 
-    const enrichedOrderItems = await Promise.all(
-      order.orderItems.map(async (orderItem) => {
-        let itemDetails = null;
-        try {
-          itemDetails = await this.itemService.getItemById(orderItem.itemId)
-        }
-        catch {
-          // itemDetails = { message: 'Couldnt get it boss', data: null };
-        }
-          return {
-            ...orderItem,
-            itemDetails,
-          };
-        })
-      );
-    order.orderItems = enrichedOrderItems;
-
     return {
       statusCode: HttpStatus.OK,
       message: `Order with ID #${orderId} retrieved successfully`,
