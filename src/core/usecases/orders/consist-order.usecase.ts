@@ -2,13 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { Order } from '../../../core/entities/orders.entity';
 import { OrderRepository } from '../../../adapters/repositories/order.repository';
 import { IUseCase } from '../usecase';
+import { GetOrderByIdUseCase } from './get-order-by-id.usecase';
 
 @Injectable()
 export class ConsistOrderUseCase implements IUseCase<Order> {
-  constructor(private readonly orderRepository: OrderRepository) {}
+  constructor(
+    private readonly orderRepository: OrderRepository,
+    private readonly getOrderByIdUseCase: GetOrderByIdUseCase
+  ) {}
 
   async execute(orderId: number): Promise<Order> {
-    let order = await this.orderRepository.getById(orderId);
+    let order = await this.getOrderByIdUseCase.execute(orderId);
 
     order = await this.calculateFinalPrice(order);
     order = await this.calculatePreparationTime(order);
@@ -19,10 +23,10 @@ export class ConsistOrderUseCase implements IUseCase<Order> {
   }
 
   async calculateFinalPrice(order: Order): Promise<Order> {
-    const totalPrice = order.orderItems.reduce(
-      (acc, item) => item.Item.price + acc,
-      0,
-    );
+    const totalPrice = order.orderItems.reduce((acc, item) => {
+      if (!item.Item) return acc;
+      return item.Item.price + acc;
+     }, 0);
 
     order.totalPrice = totalPrice;
 
@@ -36,10 +40,10 @@ export class ConsistOrderUseCase implements IUseCase<Order> {
   }
 
   async calculatePreparationTime(order: Order): Promise<Order> {
-    const preparationTime = order.orderItems.reduce(
-      (acc, item) => item.Item.preparationTime + acc,
-      0,
-    );
+    const preparationTime = order.orderItems.reduce((acc, item) => {
+        if (!item.Item) return acc;
+        return item.Item.preparationTime + acc;
+      }, 0);
 
     order.preparationTime = preparationTime;
 
@@ -52,6 +56,7 @@ export class ConsistOrderUseCase implements IUseCase<Order> {
     const discountPerCombo = 0.05;
 
     const groupedCategory = order.orderItems.reduce((acc, orderItem) => {
+      if (!orderItem.Item) return acc;
       if (!acc[orderItem.Item.category]) {
         acc[orderItem.Item.category] = 0;
       }
