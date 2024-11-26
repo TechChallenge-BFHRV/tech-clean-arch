@@ -10,17 +10,17 @@ export class GetIdaasCustomerByEmailUseCase implements IUseCase<Customer> {
   async execute(email: string): Promise<any> {
     const idaasRequest = await this.apiGateway.getUser(email);
 
-    if (idaasRequest && idaasRequest.errorMessage) {
+    if (idaasRequest?.errorMessage) {
       console.log(idaasRequest.errorMessage);
       return null;
     }
 
-    if (idaasRequest && idaasRequest.Enabled) {
+    if (idaasRequest?.Enabled) {
       console.log('User FOUND on cognito!');
       const cognitoCpfObjectAttribute = idaasRequest.UserAttributes.find(
         (el) => el.Name === 'custom:cpf',
       );
-      if (cognitoCpfObjectAttribute && cognitoCpfObjectAttribute.Value) {
+      if (cognitoCpfObjectAttribute?.Value) {
         console.log(
           'User CPF on Cognito is: ',
           cognitoCpfObjectAttribute.Value,

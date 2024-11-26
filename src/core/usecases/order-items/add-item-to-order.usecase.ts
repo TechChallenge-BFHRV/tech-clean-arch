@@ -14,7 +14,6 @@ export class AddItemToOrderUseCase implements IUseCase<OrderItem> {
   ) {}
 
   async execute(orderItem: AddItemToOrderDTO): Promise<AddItemToOrderDTO> {
-    const item = await this.itemService.getItemById(orderItem.itemId);
     const createdOrderItem = await this.orderItemRepository.create(
       OrderItemMapper.toEntity(orderItem),
     );

@@ -22,7 +22,7 @@ export class GetCustomerByCpfUseCase implements IUseCase<Customer> {
       const newCustomer = await this.createCustomerUseCase.execute(
         new CustomerDTO(),
       );
-      if (newCustomer && newCustomer.id) {
+      if (newCustomer?.id) {
         const updatedCustomerCPF = await this.setCustomerCpfUseCase.execute(
           newCustomer.id,
           cpf,
