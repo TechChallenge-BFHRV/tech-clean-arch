@@ -24,7 +24,6 @@ import { SetOrderToPrepareUseCase } from '../core/usecases/orders/set-order-to-p
 import { SetOrderToReadyUseCase } from '../core/usecases/orders/set-order-to-ready.usecase';
 import { SetCustomerCpfUseCase } from '../core/usecases/customers/set-customer-cpf.use-case';
 import { IntegrationModule } from '../external/integrations/integration.module';
-import { CreateCheckoutUseCase } from '../core/usecases/checkouts/create-checkout.usecase';
 import { CheckoutController } from '../adapters/controllers/checkout.controller';
 import { BullModule } from '@nestjs/bull';
 import { OrderQueueUseCase } from '../core/usecases/orders/queue/order-queue.usecase';
@@ -99,7 +98,6 @@ const CHECKOUT_MICROSERVICE_PORT = parseInt(process.env.CHECKOUT_SERVICE_PORT, 1
     SetOrderToPrepareUseCase,
     SetOrderToReadyUseCase,
     SetCustomerCpfUseCase,
-    CreateCheckoutUseCase,
     OrderQueueUseCase,
     OrderProcessor,
     ExternalItemService,
@@ -125,7 +123,6 @@ const CHECKOUT_MICROSERVICE_PORT = parseInt(process.env.CHECKOUT_SERVICE_PORT, 1
     SetOrderToPrepareUseCase,
     SetOrderToReadyUseCase,
     SetCustomerCpfUseCase,
-    CreateCheckoutUseCase,
     OrderQueueUseCase,
     OrderProcessor,
   ],
