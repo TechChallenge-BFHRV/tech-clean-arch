@@ -4,7 +4,7 @@ WORKDIR /usr/src/techchallenge-app
 
 COPY package*.json ./
 
-RUN yarn install
+RUN yarn install --ignore-scripts
 
 COPY . .
 
@@ -25,7 +25,7 @@ WORKDIR /usr/src/techchallenge-app
 
 COPY package*.json ./
 
-RUN yarn install --production
+RUN yarn install --production --ignore-scripts
 
 COPY . .
 

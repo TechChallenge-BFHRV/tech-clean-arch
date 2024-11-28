@@ -9,7 +9,17 @@ export class Item {
   updatedAt: Date;
   category: ItemCategory;
   preparationTime: number;
-  constructor(
+  constructor({
+    id,
+    name,
+    description,
+    imageUrl,
+    price,
+    createdAt,
+    updatedAt,
+    category,
+    preparationTime,
+  }: {
     id: number,
     name: string,
     description: string,
@@ -19,7 +29,7 @@ export class Item {
     updatedAt: Date,
     category: ItemCategory,
     preparationTime: number,
-  ) {
+  }) {
     this.id = id;
     this.name = name;
     this.description = description;
