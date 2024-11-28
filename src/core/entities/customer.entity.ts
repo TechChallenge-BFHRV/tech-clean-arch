@@ -9,7 +9,17 @@ export class Customer {
   checkout?: any;
   authId?: string;
 
-  constructor(
+  constructor({
+    id,
+    createdAt,
+    updatedAt,
+    email,
+    name,
+    cpf,
+    orders,
+    checkout,
+    authId,
+  }: {
     id: number,
     createdAt: Date,
     updatedAt: Date,
@@ -19,7 +29,7 @@ export class Customer {
     orders?: any,
     checkout?: any,
     authId?: string,
-  ) {
+  }) {
     this.id = id;
     this.email = email;
     this.name = name;
