@@ -20,32 +20,27 @@ import { SetOrderToCancelledUseCase } from '../../core/usecases/orders/set-order
 import { SetOrderToFinishedUseCase } from '../../core/usecases/orders/set-order-to-finished.usecase';
 import { SetOrderToPrepareUseCase } from '../../core/usecases/orders/set-order-to-prepare.usecase';
 import { SetOrderToReadyUseCase } from '../../core/usecases/orders/set-order-to-ready.usecase';
-
-import { GetAllOrdersUseCase } from '../../core/usecases/orders/get-all-orders.usecase';
 import { AddItemToOrderUseCase } from '../../core/usecases/order-items/add-item-to-order.usecase';
 import { SetItemToOrderUseCase } from '../../core/usecases/order-items/set-item.usecase';
-import { CreateOrderUseCase } from '../../core/usecases/orders/create-order-usecase';
-import { GetOrderByIdUseCase } from '../../core/usecases/orders/get-order-by-id.usecase';
 import { SetOrderCustomerUseCase } from '../../core/usecases/orders/set-order-customer.usecase';
+import { ExternalOrderService } from 'src/external/integrations/external-order-service';
 
 @ApiTags('order')
 @Controller('order')
 export class OrderController {
   constructor(
-    private readonly createOrderUseCase: CreateOrderUseCase,
     private readonly addItemToOrderUseCase: AddItemToOrderUseCase,
-    private readonly getAllOrdersUseCase: GetAllOrdersUseCase,
     private readonly setItemToOrderUseCase: SetItemToOrderUseCase,
     private readonly getCartOrderUseCase: GetCartOrderUseCase,
     private readonly orderStepForwardUseCase: OrderStepForwardUseCase,
     private readonly orderStepBackwardUseCase: OrderStepBackwardUseCase,
     private readonly getOrdersByStatusUseCase: GetOrdersByStatusUseCase,
-    private readonly getOrderByIdUseCase: GetOrderByIdUseCase,
     private readonly setOrderToPrepareUseCase: SetOrderToPrepareUseCase,
     private readonly setOrderToReadyUseCase: SetOrderToReadyUseCase,
     private readonly setOrderToFinishedUseCase: SetOrderToFinishedUseCase,
     private readonly setOrderToCancelledUseCase: SetOrderToCancelledUseCase,
     private readonly setOrderCustomerUseCase: SetOrderCustomerUseCase,
+    private readonly externalOrderService: ExternalOrderService,
   ) {}
 
   @Get()
@@ -58,15 +53,16 @@ export class OrderController {
     description: 'Invalid request.',
   })
   async getOrders() {
-    const allOrders = await this.getAllOrdersUseCase.execute();
+    const allOrders = await this.externalOrderService.getOrders();
     return {
       statusCode: HttpStatus.OK,
       message: 'List of all orders retrieved successfully',
       data: allOrders.map((el) => {
-        const estimatedTime = el ?
-          new Date(
-            el.InProgressTimestamp?.getTime() + el.preparationTime * 1000,
-          ) : null;
+        const estimatedTime = el
+          ? new Date(
+              el.InProgressTimestamp?.getTime() + el.preparationTime * 1000,
+            )
+          : null;
 
         return {
           id: el.id,
@@ -100,7 +96,7 @@ export class OrderController {
     description: 'Invalid request.',
   })
   async getOrder(@Param('id') orderId: number) {
-    const order = await this.getOrderByIdUseCase.execute(orderId);
+    const order = await this.externalOrderService.getOrderById(orderId);
     if (!order) {
       return {
         statusCode: HttpStatus.NOT_FOUND,
@@ -108,10 +104,11 @@ export class OrderController {
         data: order,
       };
     }
-    const estimatedTime = order ?
-      new Date(
-        order.InProgressTimestamp?.getTime() + order.preparationTime * 1000,
-      ) : null;
+    const estimatedTime = order
+      ? new Date(
+          order.InProgressTimestamp?.getTime() + order.preparationTime * 1000,
+        )
+      : null;
 
     return {
       statusCode: HttpStatus.OK,
@@ -200,7 +197,7 @@ export class OrderController {
     description: 'Invalid input data.',
   })
   async createOrder() {
-    const orderCreated = await this.createOrderUseCase.execute();
+    const orderCreated = await this.externalOrderService.createOrder(null);
     return {
       statusCode: HttpStatus.CREATED,
       message: 'Order created successfully',
@@ -286,10 +283,11 @@ export class OrderController {
       message: `Orders succesffully retrieved by status ${orderStatus}.`,
       amountOfOrders: orders.length,
       data: orders.map((el) => {
-        const estimatedTime = el ?
-          new Date(
-            el.InProgressTimestamp?.getTime() + el.preparationTime * 1000,
-          ) : null;
+        const estimatedTime = el
+          ? new Date(
+              el.InProgressTimestamp?.getTime() + el.preparationTime * 1000,
+            )
+          : null;
 
         return {
           ...el,
