@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: techchallenge-order-microservice
+spec:
+  selector:
+    matchLabels:
+      app: techchallenge-order-microservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: techchallenge-order-microservice
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: techchallenge-k8s
+          image: viniciusdeliz/techchallenge-order-microservice:main
+          ports: 
+            - containerPort: 3003
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: my-config
+                  key: ORDER_MICROSERVICE_DATABASE_URL
+          resources:
+            requests:
+              cpu: 1m
+              memory: "256Mi"
+              ephemeral-storage: "500Mi"
+            limits:
+              memory: "512Mi"
+              ephemeral-storage: "2Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: techchallenge-order-microservice
+  labels:
+    app: techchallenge-order-microservice
+spec:
+  selector:
+    app: techchallenge-order-microservice
+  ports:
+    - protocol: TCP
+      port: 3003 # The port that other services will use to access it
+      targetPort: 3003 # The port exposed by the container
+  type: ClusterIP # Internal communication within the cluster

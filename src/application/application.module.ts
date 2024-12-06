@@ -35,33 +35,47 @@ import { GetIdaasCustomerByEmailUseCase } from '../core/usecases/customers/get-i
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ExternalItemService } from '../external/integrations/external-item-service';
 import { ExternalCheckoutService } from '../external/integrations/external-checkout-service';
+import { ExternalOrderService } from 'src/external/integrations/external-order-service';
 
 const ITEMS_MICROSERVICE_HOST = process.env.ITEMS_SERVICE_HOST || 'localhost';
-const ITEMS_MICROSERVICE_PORT = parseInt(process.env.ITEMS_SERVICE_PORT, 10) || 3000;
+const ITEMS_MICROSERVICE_PORT =
+  parseInt(process.env.ITEMS_SERVICE_PORT, 10) || 3000;
 
-const CHECKOUT_MICROSERVICE_HOST = process.env.CHECKOUT_SERVICE_HOST || 'localhost';
-const CHECKOUT_MICROSERVICE_PORT = parseInt(process.env.CHECKOUT_SERVICE_PORT, 10) || 3002;
+const CHECKOUT_MICROSERVICE_HOST =
+  process.env.CHECKOUT_SERVICE_HOST || 'localhost';
+const CHECKOUT_MICROSERVICE_PORT =
+  parseInt(process.env.CHECKOUT_SERVICE_PORT, 10) || 3002;
 
-
+  const ORDER_MICROSERVICE_HOST = process.env.ORDER_SERVICE_HOST || 'localhost';
+  const ORDER_MICROSERVICE_PORT = parseInt(process.env.ORDER_SERVICE_PORT, 10) || 3003;
 @Module({
   imports: [
-    ClientsModule.register([{
-      name: 'ITEMS_MICROSERVICE',
-      transport: Transport.TCP,
-      options: {
-        host: ITEMS_MICROSERVICE_HOST,
-        port: ITEMS_MICROSERVICE_PORT,
-      }
-    },
-    {
-      name: 'CHECKOUT_MICROSERVICE',
-      transport: Transport.TCP,
-      options: {
-        host: CHECKOUT_MICROSERVICE_HOST,
-        port: CHECKOUT_MICROSERVICE_PORT,
+    ClientsModule.register([
+      {
+        name: 'ITEMS_MICROSERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: ITEMS_MICROSERVICE_HOST,
+          port: ITEMS_MICROSERVICE_PORT,
+        },
       },
-    },
-  ]),
+      {
+        name: 'CHECKOUT_MICROSERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: CHECKOUT_MICROSERVICE_HOST,
+          port: CHECKOUT_MICROSERVICE_PORT,
+        },
+      },
+      {
+        name: 'ORDER_MICROSERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: ORDER_MICROSERVICE_HOST,
+          port: ORDER_MICROSERVICE_PORT,
+        },
+      },
+    ]),
     forwardRef(() => DatabaseModule),
     forwardRef(() => IntegrationModule),
     BullModule.forRoot({
@@ -101,7 +115,8 @@ const CHECKOUT_MICROSERVICE_PORT = parseInt(process.env.CHECKOUT_SERVICE_PORT, 1
     OrderQueueUseCase,
     OrderProcessor,
     ExternalItemService,
-    ExternalCheckoutService
+    ExternalCheckoutService,
+    ExternalOrderService,
   ],
   exports: [
     CreateCustomerUseCase,

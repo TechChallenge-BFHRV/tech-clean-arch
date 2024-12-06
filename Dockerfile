@@ -9,7 +9,7 @@ RUN yarn install --ignore-scripts
 COPY . .
 
 # Remove items-microservice submodule content from main backend and generate prisma
-RUN rm -rf checkout-microservice && rm -rf items-microservice && npx prisma generate
+RUN rm -rf order-microservice && rm -rf checkout-microservice && rm -rf items-microservice && npx prisma generate
 
 COPY prisma ./prisma
 

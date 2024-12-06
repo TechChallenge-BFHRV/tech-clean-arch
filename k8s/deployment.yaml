@@ -27,6 +27,10 @@ spec:
               value: techchallenge-checkout-microservice
             - name: CHECKOUT_SERVICE_PORT
               value: "3002"
+            - name: ORDER_SERVICE_HOST
+              value: techchallenge-checkout-microservice
+            - name: ORDER_SERVICE_PORT
+              value: "3003"
             - name: DATABASE_URL
               valueFrom:
                 configMapKeyRef:
