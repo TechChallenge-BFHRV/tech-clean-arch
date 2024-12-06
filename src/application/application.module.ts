@@ -46,6 +46,8 @@ const CHECKOUT_MICROSERVICE_HOST =
 const CHECKOUT_MICROSERVICE_PORT =
   parseInt(process.env.CHECKOUT_SERVICE_PORT, 10) || 3002;
 
+  const ORDER_MICROSERVICE_HOST = process.env.ORDER_SERVICE_HOST || 'localhost';
+  const ORDER_MICROSERVICE_PORT = parseInt(process.env.ORDER_SERVICE_PORT, 10) || 3003;
 @Module({
   imports: [
     ClientsModule.register([
@@ -63,6 +65,14 @@ const CHECKOUT_MICROSERVICE_PORT =
         options: {
           host: CHECKOUT_MICROSERVICE_HOST,
           port: CHECKOUT_MICROSERVICE_PORT,
+        },
+      },
+      {
+        name: 'ORDER_MICROSERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: ORDER_MICROSERVICE_HOST,
+          port: ORDER_MICROSERVICE_PORT,
         },
       },
     ]),
