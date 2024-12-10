@@ -53,37 +53,7 @@ export class OrderController {
     description: 'Invalid request.',
   })
   async getOrders() {
-    const allOrders = await this.externalOrderService.getOrders();
-    return {
-      statusCode: HttpStatus.OK,
-      message: 'List of all orders retrieved successfully',
-      data: allOrders.map((el) => {
-        const estimatedTime = el
-          ? new Date(
-              el.InProgressTimestamp?.getTime() + el.preparationTime * 1000,
-            )
-          : null;
-
-        return {
-          id: el.id,
-          totalPrice: el.totalPrice,
-          status: el.status,
-          step: el.step,
-          createdAt: el.createdAt,
-          updatedAt: el.updatedAt,
-          customerId: el.customerId,
-          items: el?.orderItems?.map((orderItem) => {
-            return { orderItemId: orderItem.id, ...orderItem.Item };
-          }),
-          estimatedTime: estimatedTime,
-          minutesRemaining: estimatedTime
-            ? Math.floor(
-                (estimatedTime?.getTime() - new Date()?.getTime()) / 60000,
-              )
-            : null,
-        };
-      }),
-    };
+    return this.externalOrderService.getOrders();
   }
 
   @Get('/:id')
@@ -97,32 +67,7 @@ export class OrderController {
   })
   async getOrder(@Param('id') orderId: number) {
     const order = await this.externalOrderService.getOrderById(orderId);
-    if (!order) {
-      return {
-        statusCode: HttpStatus.NOT_FOUND,
-        message: `Order with ID #${orderId} not found!`,
-        data: order,
-      };
-    }
-    const estimatedTime = order
-      ? new Date(
-          order.InProgressTimestamp?.getTime() + order.preparationTime * 1000,
-        )
-      : null;
-
-    return {
-      statusCode: HttpStatus.OK,
-      message: `Order with ID #${orderId} retrieved successfully`,
-      data: {
-        ...order,
-        estimatedTime: estimatedTime,
-        minutesRemaining: estimatedTime
-          ? Math.floor(
-              (estimatedTime?.getTime() - new Date()?.getTime()) / 60000,
-            )
-          : null,
-      },
-    };
+    return order;
   }
 
   @Post('add-to-cart')
@@ -198,11 +143,7 @@ export class OrderController {
   })
   async createOrder() {
     const orderCreated = await this.externalOrderService.createOrder(null);
-    return {
-      statusCode: HttpStatus.CREATED,
-      message: 'Order created successfully',
-      data: orderCreated,
-    };
+    return orderCreated;
   }
 
   @Get(':id/cart')
