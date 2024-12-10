@@ -11,7 +11,8 @@ export class ExternalOrderService {
   ) {}
 
   async createOrder(order: CreateOrderDTO) {
-    const res = this.orderMicroserviceClient.send('create_order', { ...order });
+    const newOrder = new CreateOrderDTO();
+    const res = this.orderMicroserviceClient.send('create_order', { ...newOrder });
     const val = await lastValueFrom(res);
     return val;
   }
