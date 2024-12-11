@@ -80,12 +80,8 @@ export class OrderController {
     description: 'Invalid input data.',
   })
   async addItemToCart(@Body() orderItem: AddItemToOrderDTO) {
-    const itemAdded = await this.addItemToOrderUseCase.execute(orderItem);
-    return {
-      statusCode: HttpStatus.CREATED,
-      message: 'Item added to order successfully',
-      data: itemAdded,
-    };
+    const itemAdded = await this.externalOrderService.addItemToCart(orderItem);
+    return itemAdded;
   }
 
   @Put('remove-from-cart')

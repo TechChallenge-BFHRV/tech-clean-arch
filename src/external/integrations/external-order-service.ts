@@ -2,6 +2,8 @@ import { Injectable, Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
 import { CreateOrderDTO } from '../../pkg/dtos/create-order-dto';
+import { AddItemToOrderDTO } from '../../pkg/dtos/add-item-to-order-dto';
+import { Order } from '../../core/entities/orders.entity';
 
 @Injectable()
 export class ExternalOrderService {
@@ -31,6 +33,18 @@ export class ExternalOrderService {
 
   async remove(id: number) {
     const req = this.orderMicroserviceClient.send('delete_order', id);
+    const val = await lastValueFrom(req);
+    return val;
+  }
+
+  async addItemToCart(orderItem: AddItemToOrderDTO) {
+    const req = this.orderMicroserviceClient.send('add_to_cart', orderItem);
+    const val = await lastValueFrom(req);
+    return val;
+  }
+
+  async update(orderId: number, order: Order) {
+    const req = this.orderMicroserviceClient.send('update_order', { orderId, order });
     const val = await lastValueFrom(req);
     return val;
   }
