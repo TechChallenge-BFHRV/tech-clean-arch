@@ -2,24 +2,23 @@ import { Injectable, Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
 import { CreateCheckoutDTO } from '../../pkg/dtos/create-checkout-dto';
-import { OrderRepository } from '../../adapters/repositories/order.repository';
-import { GetOrderByIdUseCase } from 'src/core/usecases/orders/get-order-by-id.usecase';
 import { Status } from '../../core/entities/status.entity';
 import { Step } from '../../core/entities/step.entity';
 import { ConsistOrderUseCase } from '../../core/usecases/orders/consist-order.usecase';
+import { ExternalOrderService } from './external-order-service';
 
 @Injectable()
 export class ExternalCheckoutService {
   constructor(
     @Inject('CHECKOUT_MICROSERVICE') private readonly checkoutMicroserviceClient: ClientProxy,
-    private readonly orderRepository: OrderRepository,
-    private readonly getOrderByIdUseCase: GetOrderByIdUseCase,
     private readonly consistOrderUseCase: ConsistOrderUseCase,
+    private readonly orderService: ExternalOrderService,
   ) {}
 
   async createCheckout(createCheckoutDTO: CreateCheckoutDTO) {
-    await this.consistOrderUseCase.execute(createCheckoutDTO.orderId);
-    const order = await this.getOrderByIdUseCase.execute(createCheckoutDTO.orderId);
+    const consistedOrder = await this.consistOrderUseCase.execute(createCheckoutDTO.orderId);
+    const orderResponse = await this.orderService.getOrderById(createCheckoutDTO.orderId);
+    const order = orderResponse.data;
 
     if (order.status !== 'STARTED') {
       throw new Error('Order must be in STARTED status to create a checkout');
@@ -29,7 +28,7 @@ export class ExternalCheckoutService {
       throw new Error('Order must have at least one item to create a checkout');
     }
     order.step = Step.CHECKOUT;
-    await this.orderRepository.update(order.id, order);
+    await this.orderService.update(order.id, order);
 
     const response = this.checkoutMicroserviceClient.send('create_checkout', createCheckoutDTO);
     const val = await lastValueFrom(response);
@@ -37,7 +36,7 @@ export class ExternalCheckoutService {
     if (val && val.data) {
       order.status = val.data.status;
       order.step = Step.PAYMENT_REQUEST;
-      await this.orderRepository.update(order.id, order);
+      await this.orderService.update(order.id, order);
   
       if (val.data.status === 'PENDING') {
         const finalRes = await this.processCheckout(val.data._id, order.finalPrice);
@@ -50,7 +49,8 @@ export class ExternalCheckoutService {
   async processCheckout(id: string, totalPrice: number) {
     const processCheckout = this.checkoutMicroserviceClient.send('process_checkout', { id, totalPrice });
     const processVal = await lastValueFrom(processCheckout);
-    const order = await this.getOrderByIdUseCase.execute(processVal.data.orderId);
+    const orderRes = await this.orderService.getOrderById(processVal.data.orderId);
+    const order = orderRes.data;
     if (processVal.data.status === 'REJECTED') {
       order.status = Status.STARTED;
     }
@@ -58,7 +58,7 @@ export class ExternalCheckoutService {
       order.status = Status.APPROVED;
       order.step = Step.COMPLETED;
     }
-    await this.orderRepository.update(order.id, order);
+    await this.orderService.update(order.id, order);
     return processVal;
   }
 }

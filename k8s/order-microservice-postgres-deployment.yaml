@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-database-db
+  labels:
+    app: order-database-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-database-db
+  template:
+    metadata:
+      labels:
+        app: order-database-db
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: order-database-db
+          image: postgres:15 # Use the official PostgreSQL image
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: docker # Set the PostgreSQL username
+            - name: POSTGRES_PASSWORD
+              value: docker # Set the PostgreSQL password
+            - name: POSTGRES_DB
+              value: techchallenge # Set the default database name
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+              ephemeral-storage: "500Mi"
+            limits:
+              memory: "2Gi"
+              ephemeral-storage: "4Gi"
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-database-db
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    app: order-database-db
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
