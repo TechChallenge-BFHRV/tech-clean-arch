@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: techchallenge-order-microservice
+  name: techchallenge-orders-microservice
 spec:
   selector:
     matchLabels:
-      app: techchallenge-order-microservice
+      app: techchallenge-orders-microservice
   replicas: 1
   template:
     metadata:
       labels:
-        app: techchallenge-order-microservice
+        app: techchallenge-orders-microservice
     spec:
       automountServiceAccountToken: false
       containers:
         - name: techchallenge-k8s
-          image: viniciusdeliz/techchallenge-order-microservice:main
+          image: viniciusdeliz/techchallenge-orders-microservice:main
           ports: 
             - containerPort: 3003
           env:
-            - name: DATABASE_URL
+            - name: ORDER_DATABASE_URL
               valueFrom:
                 configMapKeyRef:
                   name: my-config
@@ -36,12 +36,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: techchallenge-order-microservice
+  name: techchallenge-orders-microservice
   labels:
-    app: techchallenge-order-microservice
+    app: techchallenge-orders-microservice
 spec:
   selector:
-    app: techchallenge-order-microservice
+    app: techchallenge-orders-microservice
   ports:
     - protocol: TCP
       port: 3003 # The port that other services will use to access it
