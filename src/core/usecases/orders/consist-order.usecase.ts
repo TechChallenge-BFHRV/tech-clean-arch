@@ -31,10 +31,13 @@ export class ConsistOrderUseCase implements IUseCase<Order> {
         };
       })
     );
-    order.data.orderItems = enrichedOrderItems;
+    let orderDataClone = { ...order.data, orderItems: enrichedOrderItems };
+    orderDataClone = await this.calculateFinalPrice(orderDataClone);
+    orderDataClone = await this.calculatePreparationTime(orderDataClone);
 
-    order.data = await this.calculateFinalPrice(order.data);
-    order.data = await this.calculatePreparationTime(order.data);
+    order.data.totalPrice = orderDataClone.totalPrice;
+    order.data.finalPrice = orderDataClone.finalPrice;
+    order.data.preparationTime = orderDataClone.preparationTime;
     await this.orderService.update(order.id, order.data);
 
     return order.data;
