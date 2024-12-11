@@ -20,32 +20,27 @@ import { SetOrderToCancelledUseCase } from '../../core/usecases/orders/set-order
 import { SetOrderToFinishedUseCase } from '../../core/usecases/orders/set-order-to-finished.usecase';
 import { SetOrderToPrepareUseCase } from '../../core/usecases/orders/set-order-to-prepare.usecase';
 import { SetOrderToReadyUseCase } from '../../core/usecases/orders/set-order-to-ready.usecase';
-
-import { GetAllOrdersUseCase } from '../../core/usecases/orders/get-all-orders.usecase';
 import { AddItemToOrderUseCase } from '../../core/usecases/order-items/add-item-to-order.usecase';
 import { SetItemToOrderUseCase } from '../../core/usecases/order-items/set-item.usecase';
-import { CreateOrderUseCase } from '../../core/usecases/orders/create-order-usecase';
-import { GetOrderByIdUseCase } from '../../core/usecases/orders/get-order-by-id.usecase';
 import { SetOrderCustomerUseCase } from '../../core/usecases/orders/set-order-customer.usecase';
+import { ExternalOrderService } from 'src/external/integrations/external-order-service';
 
 @ApiTags('order')
 @Controller('order')
 export class OrderController {
   constructor(
-    private readonly createOrderUseCase: CreateOrderUseCase,
     private readonly addItemToOrderUseCase: AddItemToOrderUseCase,
-    private readonly getAllOrdersUseCase: GetAllOrdersUseCase,
     private readonly setItemToOrderUseCase: SetItemToOrderUseCase,
     private readonly getCartOrderUseCase: GetCartOrderUseCase,
     private readonly orderStepForwardUseCase: OrderStepForwardUseCase,
     private readonly orderStepBackwardUseCase: OrderStepBackwardUseCase,
     private readonly getOrdersByStatusUseCase: GetOrdersByStatusUseCase,
-    private readonly getOrderByIdUseCase: GetOrderByIdUseCase,
     private readonly setOrderToPrepareUseCase: SetOrderToPrepareUseCase,
     private readonly setOrderToReadyUseCase: SetOrderToReadyUseCase,
     private readonly setOrderToFinishedUseCase: SetOrderToFinishedUseCase,
     private readonly setOrderToCancelledUseCase: SetOrderToCancelledUseCase,
     private readonly setOrderCustomerUseCase: SetOrderCustomerUseCase,
+    private readonly externalOrderService: ExternalOrderService,
   ) {}
 
   @Get()
@@ -58,36 +53,7 @@ export class OrderController {
     description: 'Invalid request.',
   })
   async getOrders() {
-    const allOrders = await this.getAllOrdersUseCase.execute();
-    return {
-      statusCode: HttpStatus.OK,
-      message: 'List of all orders retrieved successfully',
-      data: allOrders.map((el) => {
-        const estimatedTime = el ?
-          new Date(
-            el.InProgressTimestamp?.getTime() + el.preparationTime * 1000,
-          ) : null;
-
-        return {
-          id: el.id,
-          totalPrice: el.totalPrice,
-          status: el.status,
-          step: el.step,
-          createdAt: el.createdAt,
-          updatedAt: el.updatedAt,
-          customerId: el.customerId,
-          items: el?.orderItems?.map((orderItem) => {
-            return { orderItemId: orderItem.id, ...orderItem.Item };
-          }),
-          estimatedTime: estimatedTime,
-          minutesRemaining: estimatedTime
-            ? Math.floor(
-                (estimatedTime?.getTime() - new Date()?.getTime()) / 60000,
-              )
-            : null,
-        };
-      }),
-    };
+    return this.externalOrderService.getOrders();
   }
 
   @Get('/:id')
@@ -100,32 +66,8 @@ export class OrderController {
     description: 'Invalid request.',
   })
   async getOrder(@Param('id') orderId: number) {
-    const order = await this.getOrderByIdUseCase.execute(orderId);
-    if (!order) {
-      return {
-        statusCode: HttpStatus.NOT_FOUND,
-        message: `Order with ID #${orderId} not found!`,
-        data: order,
-      };
-    }
-    const estimatedTime = order ?
-      new Date(
-        order.InProgressTimestamp?.getTime() + order.preparationTime * 1000,
-      ) : null;
-
-    return {
-      statusCode: HttpStatus.OK,
-      message: `Order with ID #${orderId} retrieved successfully`,
-      data: {
-        ...order,
-        estimatedTime: estimatedTime,
-        minutesRemaining: estimatedTime
-          ? Math.floor(
-              (estimatedTime?.getTime() - new Date()?.getTime()) / 60000,
-            )
-          : null,
-      },
-    };
+    const order = await this.externalOrderService.getOrderById(orderId);
+    return order;
   }
 
   @Post('add-to-cart')
@@ -138,12 +80,8 @@ export class OrderController {
     description: 'Invalid input data.',
   })
   async addItemToCart(@Body() orderItem: AddItemToOrderDTO) {
-    const itemAdded = await this.addItemToOrderUseCase.execute(orderItem);
-    return {
-      statusCode: HttpStatus.CREATED,
-      message: 'Item added to order successfully',
-      data: itemAdded,
-    };
+    const itemAdded = await this.externalOrderService.addItemToCart(orderItem);
+    return itemAdded;
   }
 
   @Put('remove-from-cart')
@@ -200,12 +138,8 @@ export class OrderController {
     description: 'Invalid input data.',
   })
   async createOrder() {
-    const orderCreated = await this.createOrderUseCase.execute();
-    return {
-      statusCode: HttpStatus.CREATED,
-      message: 'Order created successfully',
-      data: orderCreated,
-    };
+    const orderCreated = await this.externalOrderService.createOrder(null);
+    return orderCreated;
   }
 
   @Get(':id/cart')
@@ -286,10 +220,11 @@ export class OrderController {
       message: `Orders succesffully retrieved by status ${orderStatus}.`,
       amountOfOrders: orders.length,
       data: orders.map((el) => {
-        const estimatedTime = el ?
-          new Date(
-            el.InProgressTimestamp?.getTime() + el.preparationTime * 1000,
-          ) : null;
+        const estimatedTime = el
+          ? new Date(
+              el.InProgressTimestamp?.getTime() + el.preparationTime * 1000,
+            )
+          : null;
 
         return {
           ...el,

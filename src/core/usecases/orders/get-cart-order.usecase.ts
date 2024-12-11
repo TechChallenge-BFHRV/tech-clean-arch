@@ -1,21 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { Order } from '../../../core/entities/orders.entity';
-import { OrderRepository } from '../../../adapters/repositories/order.repository';
 import { IUseCase } from '../usecase';
 import { ConsistOrderUseCase } from './consist-order.usecase';
+import { ExternalOrderService } from '../../../external/integrations/external-order-service';
 
 @Injectable()
 export class GetCartOrderUseCase implements IUseCase<Order> {
   constructor(
-    private readonly orderRepository: OrderRepository,
     private readonly consistOrderUseCase: ConsistOrderUseCase,
+    private readonly orderService: ExternalOrderService,
   ) {}
   async execute(orderId: number): Promise<Order> {
-    let order = await this.orderRepository.getById(orderId);
+    let order = await this.orderService.getOrderById(orderId);
 
-    order = await this.consistOrderUseCase.execute(order.id);
+    order.data = await this.consistOrderUseCase.execute(order.data.id);
 
-    return order;
+    return order.data;
   }
 
   async calculateFinalPrice(order: Order): Promise<Order> {

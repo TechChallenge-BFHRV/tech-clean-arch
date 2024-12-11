@@ -4,3 +4,6 @@
 [submodule "checkout-microservice"]
 	path = checkout-microservice
 	url = https://github.com/TechChallenge-BFHRV/checkout-microservice
+[submodule "order-microservice"]
+	path = order-microservice
+	url = https://github.com/TechChallenge-BFHRV/order-microservice
