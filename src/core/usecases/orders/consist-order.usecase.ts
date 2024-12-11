@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Order } from '../../../core/entities/orders.entity';
-import { OrderRepository } from '../../../adapters/repositories/order.repository';
 import { IUseCase } from '../usecase';
-import { GetOrderByIdUseCase } from './get-order-by-id.usecase';
 import { ExternalOrderService } from '../../../external/integrations/external-order-service';
 import { ExternalItemService } from '../../../external/integrations/external-item-service';
 
